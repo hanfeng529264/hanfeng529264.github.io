@@ -193,99 +193,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-JNDI 是什么" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/04/04/JNDI 是什么/" class="article-date">
-  	<time datetime="2019-04-04T06:19:32.875Z" itemprop="datePublished">2019-04-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/04/JNDI 是什么/">
-        JNDI 是什么
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JNDI-是什么"><a href="#JNDI-是什么" class="headerlink" title="JNDI 是什么"></a>JNDI 是什么</h1><p><strong>JNDI</strong> ( Java Naming and Directory Interface, Java 命名和目录接口 ) 是 SUN 公司提供的一种标准的 Java 命名系统接口，JNDI 提供统一的客户端 API，通过不同的访问提供者接口 JNDI 服务供应接口 ( SPI ) 的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。</p>
-<h2 id="没有-JNDI-的做法："><a href="#没有-JNDI-的做法：" class="headerlink" title="没有 JNDI 的做法："></a>没有 JNDI 的做法：</h2><p>程序员开发时，知道要开发访问 MySQL 数据库的应用，于是将一个对 MySQL JDBC 驱动程序类的引用进行了编码，并通过使用适当的 JDBC URL 连接到数据库。<br>就像以下代码这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Connection conn=null;</span><br><span class="line">try &#123;</span><br><span class="line">  Class.forName(&quot;com.mysql.jdbc.Driver&quot;,</span><br><span class="line">                true, Thread.currentThread().getContextClassLoader());</span><br><span class="line">  conn=DriverManager.getConnection(&quot;jdbc:mysql://MyDBServer?user=qingfeng&amp;password=mingyue&quot;);</span><br><span class="line">  /* 使用conn并进行SQL操作 */</span><br><span class="line">  ......</span><br><span class="line">  conn.close();</span><br><span class="line">&#125; </span><br><span class="line">catch(Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125; </span><br><span class="line">finally &#123;</span><br><span class="line">  if(conn!=null) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      conn.close();</span><br><span class="line">    &#125; catch(SQLException e) &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是传统的做法，也是以前非Java程序员（如 Delphi、VB 等）常见的做法。这种做法一般在小规模的开发过程中不会产生问题，只要程序员熟悉 Java 语言、了解 JDBC 技术和 MySQL ，可以很快开发出相应的应用程序。</p>
-<h3 id="没有-JNDI-的做法存在的问题："><a href="#没有-JNDI-的做法存在的问题：" class="headerlink" title="没有 JNDI 的做法存在的问题："></a>没有 JNDI 的做法存在的问题：</h3><ol>
-<li>数据库服务器名称MyDBServer 、用户名和口令都可能需要改变，由此引发JDBC URL需要修改；</li>
-<li>数据库可能改用别的产品，如改用DB2或者Oracle，引发JDBC驱动程序包和类名需要修改；</li>
-<li>随着实际使用终端的增加，原配置的连接池参数可能需要调整；<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3>程序员应该不需要关心“具体的数据库后台是什么？JDBC驱动程序是什么？JDBC URL格式是什么？访问数据库的用户名和口令是什么？”等等这些问题，程序员编写的程序应该没有对 JDBC 驱动程序的引用，没有服务器名称，没有用户名称或口令 —— 甚至没有数据库池或连接管理。而是把这些问题交给J2EE容器来配置和管理，程序员只需要对这些配置和管理进行引用即可。</li>
-</ol>
-<p>由此，就有了JNDI。</p>
-<h2 id="用了JNDI之后的做法："><a href="#用了JNDI之后的做法：" class="headerlink" title="用了JNDI之后的做法："></a>用了JNDI之后的做法：</h2><p>首先，在在J2EE容器中配置JNDI参数，定义一个数据源，也就是JDBC引用参数，给这个数据源设置一个名称；然后，在程序中，通过数据源名称引用数据源从而访问后台数据库。<br>具体操作如下（以JBoss为例）：</p>
-<h4 id="1、配置数据源"><a href="#1、配置数据源" class="headerlink" title="1、配置数据源:"></a>1、配置数据源:</h4><p>在JBoss的 D:/jboss420GA/docs/examples/jca 文件夹下面，有很多不同数据库引用的数据源定义模板。将其中的 mysql-ds.xml 文件Copy到你使用的服务器下，如 D:/jboss420GA/server/default/deploy。<br>修改 mysql-ds.xml 文件的内容，使之能通过JDBC正确访问你的MySQL数据库，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;datasources&gt;</span><br><span class="line">&lt;local-tx-datasource&gt;</span><br><span class="line">    &lt;jndi-name&gt;MySqlDS&lt;/jndi-name&gt;</span><br><span class="line">    &lt;connection-url&gt;jdbc:mysql://localhost:3306/lw&lt;/connection-url&gt;</span><br><span class="line">    &lt;driver-class&gt;com.mysql.jdbc.Driver&lt;/driver-class&gt;</span><br><span class="line">    &lt;user-name&gt;root&lt;/user-name&gt;</span><br><span class="line">    &lt;password&gt;rootpassword&lt;/password&gt;</span><br><span class="line">&lt;exception-sorter-class-name&gt;org.jboss.resource.adapter.jdbc.vendor.MySQLExceptionSorter&lt;/exception-sorter-class-name&gt;</span><br><span class="line">    &lt;metadata&gt;</span><br><span class="line">       &lt;type-mapping&gt;mySQL&lt;/type-mapping&gt;</span><br><span class="line">    &lt;/metadata&gt;</span><br><span class="line">&lt;/local-tx-datasource&gt;</span><br><span class="line">&lt;/datasources&gt;</span><br></pre></td></tr></table></figure>
-<p>这里，定义了一个名为MySqlDS的数据源，其参数包括JDBC的URL，驱动类名，用户名及密码等。</p>
-<h4 id="2、在程序中引用数据源："><a href="#2、在程序中引用数据源：" class="headerlink" title="2、在程序中引用数据源："></a>2、在程序中引用数据源：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Connection conn=null;</span><br><span class="line">try &#123;</span><br><span class="line">  Context ctx=new InitialContext();</span><br><span class="line">  Object datasourceRef=ctx.lookup(&quot;java:MySqlDS&quot;); //引用数据源</span><br><span class="line">  DataSource ds=(Datasource)datasourceRef;</span><br><span class="line">  conn=ds.getConnection();</span><br><span class="line">  /* 使用conn进行数据库SQL操作 */</span><br><span class="line">  ......</span><br><span class="line">  c.close();</span><br><span class="line">&#125; </span><br><span class="line">catch(Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125; </span><br><span class="line">finally &#123;</span><br><span class="line">  if(conn!=null) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      conn.close();</span><br><span class="line">    &#125; catch(SQLException e) &#123; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>直接使用 JDBC 或者通过 JNDI 引用数据源的编程代码量相差无几，但是现在的程序可以不用关心具体 JDBC 参数了。<br>在系统部署后，如果数据库的相关参数变更，只需要重新配置 mysql-ds.xml 修改其中的JDBC参数，只要保证数据源的名称不变，那么程序源代码就无需修改。</p>
-<p>由此可见，JNDI避免了程序与数据库之间的紧耦合，使应用更加易于配置、易于部署。</p>
-<h2 id="JNDI的扩展："><a href="#JNDI的扩展：" class="headerlink" title="JNDI的扩展："></a>JNDI的扩展：</h2><p>JNDI 在满足了数据源配置的要求的基础上，还进一步扩充了作用：所有与系统外部的资源的引用，都可以通过 JNDI 定义和引用。</p>
-<p>所以，在 J2EE 规范中，J2EE 中的资源并不局限于 JDBC 数据源。引用的类型有很多，其中包括资源引用（已经讨论过）、环境实体和 EJB 引用。特别是 EJB 引用，它暴露了 JNDI 在 J2EE 中的另外一项关键角色：查找其他应用程序组件。</p>
-<p>EJB 的 JNDI 引用非常类似于 JDBC 资源的引用。在服务趋于转换的环境中，这是一种很有效的方法。可以对应用程序架构中所得到的所有组件进行这类配置管理，从 EJB 组件到 JMS 队列和主题，再到简单配置字符串或其他对象，这可以降低随时间的推移服务变更所产生的维护成本，同时还可以简化部署，减少集成工作。 外部资源”。</p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>J2EE 规范要求所有 J2EE 容器都要提供 JNDI 规范的实现。JNDI 在 J2EE 中的角色就是“交换机” —— J2EE 组件在运行时间接地查找其他组件、资源或服务的通用机制。在多数情况下，提供 JNDI 供应者的容器可以充当有限的数据存储，这样管理员就可以设置应用程序的执行属性，并让其他应用程序引用这些属性（Java 管理扩展（Java Management Extensions，JMX）也可以用作这个目的）。JNDI 在 J2EE 应用程序中的主要角色就是提供间接层，这样组件就可以发现所需要的资源，而不用了解这些间接性。</p>
-<p>在 J2EE 中，JNDI 是把 J2EE 应用程序合在一起的粘合剂，JNDI 提供的间接寻址允许跨企业交付可伸缩的、功能强大且很灵活的应用程序。这是 J2EE 的承诺，而且经过一些计划和预先考虑，这个承诺是完全可以实现的。</p>
-<p>引用至：<a href="http://blog.csdn.net/zhaosg198312/article/details/3979435" target="_blank" rel="noopener">http://blog.csdn.net/zhaosg198312/article/details/3979435</a></p>
-<p>JNDI数据源的配置:<a href="http://www.cnblogs.com/xdp-gacl/p/3951952.html" target="_blank" rel="noopener">http://www.cnblogs.com/xdp-gacl/p/3951952.html</a></p>
-<p>关于在Tomcat中如何配置DataSource，可以参考文档:<a href="http://tomcat.apache.org/tomcat-5.5-doc/jndi-datasource-examples-howto.html" target="_blank" rel="noopener">http://tomcat.apache.org/tomcat-5.5-doc/jndi-datasource-examples-howto.html。</a></p>
-<p>关于在Tomcat中如何配置其他JNDI服务，可以参考文档:<a href="http://tomcat.apache.org/tomcat-5.5-doc/jndi-resources-howto.html" target="_blank" rel="noopener">http://tomcat.apache.org/tomcat-5.5-doc/jndi-resources-howto.html。</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        
-<div class="counter-tag counter">
-    <span id="/2019/04/04/JNDI 是什么/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="JNDI 是什么">
-         &nbsp;
-        view
-    </span>
-</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
- 
-
-
-
-
-
-
-
-
-  
     <article id="post-html 转换成 pdf" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
@@ -1416,6 +1323,99 @@ hello
         
 <div class="counter-tag counter">
     <span id="/2017/09/16/表达语言_jsp/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="表达式语言_ jsp">
+         &nbsp;
+        view
+    </span>
+</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+ 
+
+
+
+
+
+
+
+
+  
+    <article id="post-JNDI 是什么" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/16/JNDI 是什么/" class="article-date">
+  	<time datetime="2017-09-15T16:00:00.000Z" itemprop="datePublished">2017-09-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/16/JNDI 是什么/">
+        JNDI 是什么
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JNDI-是什么"><a href="#JNDI-是什么" class="headerlink" title="JNDI 是什么"></a>JNDI 是什么</h1><p><strong>JNDI</strong> ( Java Naming and Directory Interface, Java 命名和目录接口 ) 是 SUN 公司提供的一种标准的 Java 命名系统接口，JNDI 提供统一的客户端 API，通过不同的访问提供者接口 JNDI 服务供应接口 ( SPI ) 的实现，由管理者将 JNDI API 映射为特定的命名服务和目录系统，使得 Java 应用程序可以和这些命名服务和目录服务之间进行交互。</p>
+<h2 id="没有-JNDI-的做法："><a href="#没有-JNDI-的做法：" class="headerlink" title="没有 JNDI 的做法："></a>没有 JNDI 的做法：</h2><p>程序员开发时，知道要开发访问 MySQL 数据库的应用，于是将一个对 MySQL JDBC 驱动程序类的引用进行了编码，并通过使用适当的 JDBC URL 连接到数据库。<br>就像以下代码这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Connection conn=null;</span><br><span class="line">try &#123;</span><br><span class="line">  Class.forName(&quot;com.mysql.jdbc.Driver&quot;,</span><br><span class="line">                true, Thread.currentThread().getContextClassLoader());</span><br><span class="line">  conn=DriverManager.getConnection(&quot;jdbc:mysql://MyDBServer?user=qingfeng&amp;password=mingyue&quot;);</span><br><span class="line">  /* 使用conn并进行SQL操作 */</span><br><span class="line">  ......</span><br><span class="line">  conn.close();</span><br><span class="line">&#125; </span><br><span class="line">catch(Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125; </span><br><span class="line">finally &#123;</span><br><span class="line">  if(conn!=null) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      conn.close();</span><br><span class="line">    &#125; catch(SQLException e) &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是传统的做法，也是以前非Java程序员（如 Delphi、VB 等）常见的做法。这种做法一般在小规模的开发过程中不会产生问题，只要程序员熟悉 Java 语言、了解 JDBC 技术和 MySQL ，可以很快开发出相应的应用程序。</p>
+<h3 id="没有-JNDI-的做法存在的问题："><a href="#没有-JNDI-的做法存在的问题：" class="headerlink" title="没有 JNDI 的做法存在的问题："></a>没有 JNDI 的做法存在的问题：</h3><ol>
+<li>数据库服务器名称MyDBServer 、用户名和口令都可能需要改变，由此引发JDBC URL需要修改；</li>
+<li>数据库可能改用别的产品，如改用DB2或者Oracle，引发JDBC驱动程序包和类名需要修改；</li>
+<li>随着实际使用终端的增加，原配置的连接池参数可能需要调整；<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3>程序员应该不需要关心“具体的数据库后台是什么？JDBC驱动程序是什么？JDBC URL格式是什么？访问数据库的用户名和口令是什么？”等等这些问题，程序员编写的程序应该没有对 JDBC 驱动程序的引用，没有服务器名称，没有用户名称或口令 —— 甚至没有数据库池或连接管理。而是把这些问题交给J2EE容器来配置和管理，程序员只需要对这些配置和管理进行引用即可。</li>
+</ol>
+<p>由此，就有了JNDI。</p>
+<h2 id="用了JNDI之后的做法："><a href="#用了JNDI之后的做法：" class="headerlink" title="用了JNDI之后的做法："></a>用了JNDI之后的做法：</h2><p>首先，在在J2EE容器中配置JNDI参数，定义一个数据源，也就是JDBC引用参数，给这个数据源设置一个名称；然后，在程序中，通过数据源名称引用数据源从而访问后台数据库。<br>具体操作如下（以JBoss为例）：</p>
+<h4 id="1、配置数据源"><a href="#1、配置数据源" class="headerlink" title="1、配置数据源:"></a>1、配置数据源:</h4><p>在JBoss的 D:/jboss420GA/docs/examples/jca 文件夹下面，有很多不同数据库引用的数据源定义模板。将其中的 mysql-ds.xml 文件Copy到你使用的服务器下，如 D:/jboss420GA/server/default/deploy。<br>修改 mysql-ds.xml 文件的内容，使之能通过JDBC正确访问你的MySQL数据库，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;datasources&gt;</span><br><span class="line">&lt;local-tx-datasource&gt;</span><br><span class="line">    &lt;jndi-name&gt;MySqlDS&lt;/jndi-name&gt;</span><br><span class="line">    &lt;connection-url&gt;jdbc:mysql://localhost:3306/lw&lt;/connection-url&gt;</span><br><span class="line">    &lt;driver-class&gt;com.mysql.jdbc.Driver&lt;/driver-class&gt;</span><br><span class="line">    &lt;user-name&gt;root&lt;/user-name&gt;</span><br><span class="line">    &lt;password&gt;rootpassword&lt;/password&gt;</span><br><span class="line">&lt;exception-sorter-class-name&gt;org.jboss.resource.adapter.jdbc.vendor.MySQLExceptionSorter&lt;/exception-sorter-class-name&gt;</span><br><span class="line">    &lt;metadata&gt;</span><br><span class="line">       &lt;type-mapping&gt;mySQL&lt;/type-mapping&gt;</span><br><span class="line">    &lt;/metadata&gt;</span><br><span class="line">&lt;/local-tx-datasource&gt;</span><br><span class="line">&lt;/datasources&gt;</span><br></pre></td></tr></table></figure>
+<p>这里，定义了一个名为MySqlDS的数据源，其参数包括JDBC的URL，驱动类名，用户名及密码等。</p>
+<h4 id="2、在程序中引用数据源："><a href="#2、在程序中引用数据源：" class="headerlink" title="2、在程序中引用数据源："></a>2、在程序中引用数据源：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Connection conn=null;</span><br><span class="line">try &#123;</span><br><span class="line">  Context ctx=new InitialContext();</span><br><span class="line">  Object datasourceRef=ctx.lookup(&quot;java:MySqlDS&quot;); //引用数据源</span><br><span class="line">  DataSource ds=(Datasource)datasourceRef;</span><br><span class="line">  conn=ds.getConnection();</span><br><span class="line">  /* 使用conn进行数据库SQL操作 */</span><br><span class="line">  ......</span><br><span class="line">  c.close();</span><br><span class="line">&#125; </span><br><span class="line">catch(Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125; </span><br><span class="line">finally &#123;</span><br><span class="line">  if(conn!=null) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      conn.close();</span><br><span class="line">    &#125; catch(SQLException e) &#123; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接使用 JDBC 或者通过 JNDI 引用数据源的编程代码量相差无几，但是现在的程序可以不用关心具体 JDBC 参数了。<br>在系统部署后，如果数据库的相关参数变更，只需要重新配置 mysql-ds.xml 修改其中的JDBC参数，只要保证数据源的名称不变，那么程序源代码就无需修改。</p>
+<p>由此可见，JNDI避免了程序与数据库之间的紧耦合，使应用更加易于配置、易于部署。</p>
+<h2 id="JNDI的扩展："><a href="#JNDI的扩展：" class="headerlink" title="JNDI的扩展："></a>JNDI的扩展：</h2><p>JNDI 在满足了数据源配置的要求的基础上，还进一步扩充了作用：所有与系统外部的资源的引用，都可以通过 JNDI 定义和引用。</p>
+<p>所以，在 J2EE 规范中，J2EE 中的资源并不局限于 JDBC 数据源。引用的类型有很多，其中包括资源引用（已经讨论过）、环境实体和 EJB 引用。特别是 EJB 引用，它暴露了 JNDI 在 J2EE 中的另外一项关键角色：查找其他应用程序组件。</p>
+<p>EJB 的 JNDI 引用非常类似于 JDBC 资源的引用。在服务趋于转换的环境中，这是一种很有效的方法。可以对应用程序架构中所得到的所有组件进行这类配置管理，从 EJB 组件到 JMS 队列和主题，再到简单配置字符串或其他对象，这可以降低随时间的推移服务变更所产生的维护成本，同时还可以简化部署，减少集成工作。 外部资源”。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>J2EE 规范要求所有 J2EE 容器都要提供 JNDI 规范的实现。JNDI 在 J2EE 中的角色就是“交换机” —— J2EE 组件在运行时间接地查找其他组件、资源或服务的通用机制。在多数情况下，提供 JNDI 供应者的容器可以充当有限的数据存储，这样管理员就可以设置应用程序的执行属性，并让其他应用程序引用这些属性（Java 管理扩展（Java Management Extensions，JMX）也可以用作这个目的）。JNDI 在 J2EE 应用程序中的主要角色就是提供间接层，这样组件就可以发现所需要的资源，而不用了解这些间接性。</p>
+<p>在 J2EE 中，JNDI 是把 J2EE 应用程序合在一起的粘合剂，JNDI 提供的间接寻址允许跨企业交付可伸缩的、功能强大且很灵活的应用程序。这是 J2EE 的承诺，而且经过一些计划和预先考虑，这个承诺是完全可以实现的。</p>
+<p>引用至：<a href="http://blog.csdn.net/zhaosg198312/article/details/3979435" target="_blank" rel="noopener">http://blog.csdn.net/zhaosg198312/article/details/3979435</a></p>
+<p>JNDI数据源的配置:<a href="http://www.cnblogs.com/xdp-gacl/p/3951952.html" target="_blank" rel="noopener">http://www.cnblogs.com/xdp-gacl/p/3951952.html</a></p>
+<p>关于在Tomcat中如何配置DataSource，可以参考文档:<a href="http://tomcat.apache.org/tomcat-5.5-doc/jndi-datasource-examples-howto.html" target="_blank" rel="noopener">http://tomcat.apache.org/tomcat-5.5-doc/jndi-datasource-examples-howto.html。</a></p>
+<p>关于在Tomcat中如何配置其他JNDI服务，可以参考文档:<a href="http://tomcat.apache.org/tomcat-5.5-doc/jndi-resources-howto.html" target="_blank" rel="noopener">http://tomcat.apache.org/tomcat-5.5-doc/jndi-resources-howto.html。</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        
+<div class="counter-tag counter">
+    <span id="/2017/09/16/JNDI 是什么/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="JNDI 是什么">
          &nbsp;
         view
     </span>
