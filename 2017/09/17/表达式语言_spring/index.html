@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>表达式语言_ spring | 一只程序猿的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring Espresdsion LanguageSpring表达式语言（简称SpEL）是一个支持查询并在运行时操纵一个对象图的功能强大的表达式语言。SpEL语言的语法类似于统一EL，但提供了更多的功能，最主要的是显式方法调用和基本字符串模板函数。 同很多可用的Java 表达式语言相比，例如OGNL，MVEL和JBoss EL，SpEL的诞生是为了给Spring社区提供一个可以给Spring目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="表达式语言_ spring">
+<meta property="og:url" content="http://yoursite.com/2017/09/17/表达式语言_spring/index.html">
+<meta property="og:site_name" content="一只程序猿的博客">
+<meta property="og:description" content="Spring Espresdsion LanguageSpring表达式语言（简称SpEL）是一个支持查询并在运行时操纵一个对象图的功能强大的表达式语言。SpEL语言的语法类似于统一EL，但提供了更多的功能，最主要的是显式方法调用和基本字符串模板函数。 同很多可用的Java 表达式语言相比，例如OGNL，MVEL和JBoss EL，SpEL的诞生是为了给Spring社区提供一个可以给Spring目">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-10T13:45:46.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="表达式语言_ spring">
+<meta name="twitter:description" content="Spring Espresdsion LanguageSpring表达式语言（简称SpEL）是一个支持查询并在运行时操纵一个对象图的功能强大的表达式语言。SpEL语言的语法类似于统一EL，但提供了更多的功能，最主要的是显式方法调用和基本字符串模板函数。 同很多可用的Java 表达式语言相比，例如OGNL，MVEL和JBoss EL，SpEL的诞生是为了给Spring社区提供一个可以给Spring目">
+  
+    <link rel="alternative" href="/atom.xml" title="一只程序猿的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("MW2iyQz6scY0XFrHP96SRKVb-gzGzoHsz", "9thbl1JAC6FeVjyjSEXHYBD1");</script>
+<script src="/js/Counter.js"></script>
+  
+</head></html>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/yzcxy.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">一只程序猿</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一切都是可以改变的，不可能只有庸人的词典里才有</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/hanfeng529264" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/hf529264@163.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="/2286670111" title="qq">qq</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/hanfeng0310" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://keveon.me">keveon.me</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pqsky.me">pqsky.me</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+	
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">一只程序猿</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/yzcxy.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">一只程序猿</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一切都是可以改变的，不可能只有庸人的词典里才有</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/hanfeng529264" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/hf529264@163.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="/2286670111" title="qq">qq</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/hanfeng0310" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-表达式语言_spring" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/17/表达式语言_spring/" class="article-date">
+  	<time datetime="2017-09-16T16:00:00.000Z" itemprop="datePublished">2017-09-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      表达式语言_ spring
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/09/17/表达式语言_spring/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="表达式语言_ spring">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-Espresdsion-Language"><a href="#Spring-Espresdsion-Language" class="headerlink" title="Spring Espresdsion Language"></a>Spring Espresdsion Language</h1><p>Spring表达式语言（简称SpEL）是一个支持查询并在运行时操纵一个对象图的功能强大的表达式语言。SpEL语言的语法类似于统一EL，但提供了更多的功能，最主要的是显式方法调用和基本字符串模板函数。</p>
+<p>同很多可用的Java 表达式语言相比，例如OGNL，MVEL和JBoss EL，SpEL的诞生是为了给Spring社区提供一个可以给Spring目录中所有产品提供单一良好支持的表达式语言。其语言特性由Spring目录中的项目需求驱动，包括基于eclipse的SpringSource套件中的代码补全工具需求。也就是说，SpEL是一个基于技术中立的API允许需要时与其他表达式语言集成。</p>
+<p>SpEL作为Spring目录中表达式求值的基础，它并不是直接依赖于Spring而是可以被独立使用。为了能够自包含，本章中的许多示例把SpEL作为一个独立的表达式语言来使用。这就需要创建一些如解析器的引导基础组件类。大多数Spring用户只需要为求值编写表达式字符串而不需要关心这些基础组件</p>
+<p>SpEL 的功能特性：</p>
+<ul>
+<li>字符表达式</li>
+<li>布尔和关系操作符</li>
+<li>正则表达式</li>
+<li>类表达式</li>
+<li>访问properties，arrays，lists，maps</li>
+<li>方法调用</li>
+<li>关系操作符</li>
+<li>赋值</li>
+<li>调用构造器</li>
+<li>三元操作符</li>
+<li>变量</li>
+<li>用户自定义函数</li>
+<li>集合投影</li>
+<li>集合选择</li>
+<li>模板表达式<h2 id="使用-spring-表达式语言"><a href="#使用-spring-表达式语言" class="headerlink" title="使用 spring 表达式语言"></a>使用 spring 表达式语言</h2></li>
+</ul>
+<ol>
+<li>新建一个Maven Web项目，添加依赖，pom.xml如下所示：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.ceshi.test&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;Spring053&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line"></span><br><span class="line">    &lt;name&gt;Spring053&lt;/name&gt;</span><br><span class="line">    &lt;url&gt;http://maven.apache.org&lt;/url&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;spring.version&gt;4.3.0.RELEASE&lt;/spring.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;version&gt;4.10&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.8.9&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;cglib&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;cglib&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.2.4&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>为了IOC，定义了用户类User.java与Order.java，如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">package com.ceshi.test.Spring053;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 订单类</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class Order &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 订单名称</span><br><span class="line">     */</span><br><span class="line">    private String orderName;</span><br><span class="line">    /*</span><br><span class="line">     * 用户姓名</span><br><span class="line">     */</span><br><span class="line">    private String userName;</span><br><span class="line">    /**</span><br><span class="line">     * 用户对象</span><br><span class="line">     */</span><br><span class="line">    private User customer;</span><br><span class="line"></span><br><span class="line">    public String getOrderName() &#123;</span><br><span class="line">        return orderName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setOrderName(String orderName) &#123;</span><br><span class="line">        this.orderName = orderName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User getCustomer() &#123;</span><br><span class="line">        return customer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCustomer(User customer) &#123;</span><br><span class="line">        this.customer = customer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUserName(String userName) &#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;订单名：&quot;+this.getOrderName()+&quot;,姓名：&quot;+this.getUserName()+&quot;,编号：&quot;+this.getCustomer().getId();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">package com.ceshi.test.Spring053.spel01;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 订单类</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class Order &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 订单名称</span><br><span class="line">     */</span><br><span class="line">    private String orderName;</span><br><span class="line">    /*</span><br><span class="line">     * 用户姓名</span><br><span class="line">     */</span><br><span class="line">    private String userName;</span><br><span class="line">    /**</span><br><span class="line">     * 用户对象</span><br><span class="line">     */</span><br><span class="line">    private User customer;</span><br><span class="line"></span><br><span class="line">    public String getOrderName() &#123;</span><br><span class="line">        return orderName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setOrderName(String orderName) &#123;</span><br><span class="line">        this.orderName = orderName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User getCustomer() &#123;</span><br><span class="line">        return customer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCustomer(User customer) &#123;</span><br><span class="line">        this.customer = customer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUserName(String userName) &#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>编写容器初始化的配置文件spel01.xml，内容如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</span><br><span class="line">    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</span><br><span class="line">        http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">        http://www.springframework.org/schema/aop</span><br><span class="line">        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;gyl&quot; class=&quot;com.ceshi.test.Spring053.spel01.User&quot; p:id=&quot;9527&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;name&quot; value=&quot;张三&quot;&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;bean id=&quot;order001&quot; class=&quot;com.ceshi.test.Spring053.spel01.Order&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;customer&quot; ref=&quot;gyl&quot;&gt;&lt;/property&gt;</span><br><span class="line">        &lt;property name=&quot;name&quot; value=&quot;#&#123;gyl.name&#125;&quot;&gt;&lt;/property&gt;</span><br><span class="line">        &lt;property name=&quot;orderName&quot; value=&apos;#&#123;&quot;Apples&quot;.toUpperCase()&#125;&apos;&gt;&lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<p>复制代码<br>在配置文件中，出现了#｛｝形式的表达式，我们就称为Spel表达式。#{gyl.name}作用是找到名称为gyl的bean取出中间的name值；#{“Apples”.toUpperCase()}把字符串Apples转换成大写并输出。</p>
+<ol start="4">
+<li>取出bean测试<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.ceshi.test.Spring053.spel01;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ApplicationContext ctx=new ClassPathXmlApplicationContext(&quot;spel01.xml&quot;);</span><br><span class="line">        Order order=ctx.getBean(&quot;order001&quot;,Order.class);</span><br><span class="line">        System.out.println(order);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//运行结果：订单名：APPLES，姓名：张三，编号：9527</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="SpEL表达式Hello-World"><a href="#SpEL表达式Hello-World" class="headerlink" title="SpEL表达式Hello World!"></a>SpEL表达式Hello World!</h2><p>Spring表达式语言(SpEL)从3.X开始支持，它是一种能够支持运行时查询和操作对象图的强大的表达式，其表达式语法类似于统一表达式语言。</p>
+<p>SpEL支持如下表达式：</p>
+<ul>
+<li>基本表达式：字面量表达式、关系，逻辑与算数运算表达式、字符串连接及截取表达式、三目运算、正则表达式、括号优先级表达式；</li>
+<li>类相关表达式：类类型表达式、类实例化、instanceof表达式、变量定义及引用、赋值表达式、自定义函数、对象属性存取及安全导航表达式、对象方法调用、Bean引用；</li>
+<li>集合相关表达式：内联List、内联数组、集合，字典访问、列表，字典，数组修改、集合投影、集合选择；不支持多维内联数组初始化；不支持内联字典定义；</li>
+<li>其他表达式：模板表达式.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.ceshi.test.Spring053.spel02;</span><br><span class="line"></span><br><span class="line">import org.springframework.expression.Expression;</span><br><span class="line">import org.springframework.expression.ExpressionParser;</span><br><span class="line">import org.springframework.expression.spel.standard.SpelExpressionParser;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //创建SpEL表达式的解析器</span><br><span class="line">        ExpressionParser parser=new SpelExpressionParser();</span><br><span class="line">        //解析表达式&apos;Hello &apos;+&apos; World!&apos;</span><br><span class="line">        Expression exp=parser.parseExpression(&quot;&apos;Hello &apos;+&apos; World!&apos;&quot;);</span><br><span class="line">        //取出解析结果</span><br><span class="line">        String result=exp.getValue().toString();</span><br><span class="line">        //输出结果</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SpEL-表达式的运用"><a href="#SpEL-表达式的运用" class="headerlink" title="SpEL 表达式的运用"></a>SpEL 表达式的运用</h2><p>支持的文字表达的类型是字符串，日期，数值（整型，实型，和十六进制），布尔和空。字符串是由单引号分隔。使用反斜杠字符转移把一个单引号字符本身放在字符串中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//创建SpEL表达式的解析器</span><br><span class="line">ExpressionParser ep= new SpelExpressionParser();</span><br><span class="line">System.out.println(ep.parseExpression(&quot;&apos;HelloWorld&apos;&quot;).getValue());</span><br><span class="line">System.out.println(ep.parseExpression(&quot;0xffffff&quot;).getValue());</span><br><span class="line">System.out.println(ep.parseExpression(&quot;1.234345e+3&quot;).getValue());</span><br><span class="line">System.out.println(ep.parseExpression(&quot;new java.util.Date()&quot;).getValue());</span><br><span class="line"> </span><br><span class="line">ExpressionParser parser=new SpelExpressionParser();</span><br><span class="line">User user=new User(9527,&quot;周星驰&quot;);</span><br><span class="line">//解析表达式需要的上下文，解析时有一个默认的上下文</span><br><span class="line">EvaluationContext ctx = new StandardEvaluationContext();</span><br><span class="line">//在上下文中设置变量，变量名为user，内容为user对象</span><br><span class="line">ctx.setVariable(&quot;user&quot;, user);</span><br><span class="line">//从用户对象中获得id，获得解析后的值在ctx上下文中</span><br><span class="line">//User类在前面已定义，这里增加了一个有参构造方法。上面的示例是调用方法，其实可以这样：引用对象属性，只需使用一个句点来表示一个嵌套的属性值</span><br><span class="line">int id = (Integer) parser.parseExpression(&quot;#user.getId()&quot;).getValue(ctx);</span><br><span class="line"></span><br><span class="line">System.out.println(id);</span><br><span class="line"></span><br><span class="line">//运行结果HelloWorld</span><br><span class="line">    16777215</span><br><span class="line">    1234.345</span><br><span class="line">    Fri Jul 01 14:50:59 CST 2017</span><br><span class="line">    </span><br><span class="line">    9527</span><br></pre></td></tr></table></figure>
+<p>数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String[] students=new String[]&#123;&quot;tom&quot;,&quot;jack&quot;,&quot;rose&quot;,&quot;mark&quot;,&quot;lucy&quot;&#125;;</span><br><span class="line">        ctx.setVariable(&quot;students&quot;, students);</span><br><span class="line">        String student = parser.parseExpression(&quot;#students[3]&quot;).getValue(ctx,</span><br><span class="line">                String.class);</span><br><span class="line">        System.out.println(student);</span><br></pre></td></tr></table></figure>
+<p>大致使用都是类似的 parser.parseExpression(“ 表达式 “).getValue( 上下文, class)；</p>
+<p>parser.parseExpression(“ 表达式 “).getValue(class);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">/**关系运算符*/</span><br><span class="line">//true</span><br><span class="line">        boolean trueValue1 = parser.parseExpression(&quot;2 == 2&quot;).getValue(Boolean.class);</span><br><span class="line">        //false</span><br><span class="line">        boolean falseValue1 = parser.parseExpression(&quot;2 &lt; -5.0&quot;).getValue(Boolean.class);</span><br><span class="line">        //true</span><br><span class="line">        boolean trueValue2 = parser.parseExpression(&quot;&apos;black&apos; &lt; &apos;block&apos;&quot;).getValue(Boolean.class);</span><br><span class="line">        //false，字符xyz是否为int类型</span><br><span class="line">        boolean falseValue2 = parser.parseExpression(&quot;&apos;xyz&apos; instanceof T(int)&quot;).getValue(Boolean.class);</span><br><span class="line">        //true，正则是否匹配</span><br><span class="line">        boolean trueValue3 =parser.parseExpression(&quot;&apos;5.00&apos; matches &apos;^-?\\d+(\\.\\d&#123;2&#125;)?$&apos;&quot;).getValue(Boolean.class);</span><br><span class="line">        //false</span><br><span class="line">        boolean falseValue3=parser.parseExpression(&quot;&apos;5.0067&apos; matches &apos;^-?\\d+(\\.\\d&#123;2&#125;)?$&apos;&quot;).getValue(Boolean.class);</span><br><span class="line">/**逻辑运算*/</span><br><span class="line">        //false </span><br><span class="line">        boolean falseValue4 = parser.parseExpression(&quot;true and false&quot;).getValue(Boolean.class);</span><br><span class="line">        //true，isMember方法用于测试是否为某个对象的成员</span><br><span class="line">        String expression = &quot;isMember(&apos;Nikola Tesla&apos;) and isMember(&apos;Mihajlo Pupin&apos;)&quot;;</span><br><span class="line">        boolean trueValue4 = parser.parseExpression(expression).getValue(Boolean.class);</span><br><span class="line">// -- OR 或运算--</span><br><span class="line">        //true</span><br><span class="line">        boolean trueValue5 = parser.parseExpression(&quot;true or false&quot;).getValue(Boolean.class);</span><br><span class="line">        //true</span><br><span class="line">        String expression1 = &quot;isMember(&apos;Nikola Tesla&apos;) or isMember(&apos;Albert Einstein&apos;)&quot;;</span><br><span class="line">        boolean trueValue6 = parser.parseExpression(expression).getValue( Boolean.class);</span><br><span class="line">        //false</span><br><span class="line">        boolean falseValue5 = parser.parseExpression(&quot;!true&quot;).getValue(Boolean.class);</span><br><span class="line">        //false</span><br><span class="line">        String expression2 = &quot;isMember(&apos;Nikola Tesla&apos;) and !isMember(&apos;Mihajlo Pupin&apos;)&quot;;</span><br><span class="line">        boolean falseValue6 = parser.parseExpression(expression).getValue(Boolean.class);</span><br><span class="line">        // Addition</span><br><span class="line">        int two = parser.parseExpression(&quot;1 + 1&quot;).getValue(Integer.class); </span><br><span class="line">        // 2</span><br><span class="line">        String testString =</span><br><span class="line">        parser.parseExpression(&quot;&apos;test&apos; + &apos; &apos; + &apos;string&apos;&quot;).getValue(String.class); // &apos;test string&apos;</span><br><span class="line">        // Subtraction</span><br><span class="line">        int four = parser.parseExpression(&quot;1 - -3&quot;).getValue(Integer.class); // 4</span><br><span class="line">        double d = parser.parseExpression(&quot;1000.00 - 1e4&quot;).getValue(Double.class); // -9000</span><br><span class="line">        // Multiplication</span><br><span class="line">        int six = parser.parseExpression(&quot;-2 * -3&quot;).getValue(Integer.class); // 6</span><br><span class="line">        double twentyFour = parser.parseExpression(&quot;2.0 * 3e0 * 4&quot;).getValue(Double.class); // 24.0</span><br><span class="line">        // Division</span><br><span class="line">        int minusTwo = parser.parseExpression(&quot;6 / -3&quot;).getValue(Integer.class); // -2</span><br><span class="line">        double one = parser.parseExpression(&quot;8.0 / 4e0 / 2&quot;).getValue(Double.class); // 1.0</span><br><span class="line">        // Modulus</span><br><span class="line">        int three = parser.parseExpression(&quot;7 % 4&quot;).getValue(Integer.class); // 3</span><br><span class="line">        int one = parser.parseExpression(&quot;8 / 5 % 2&quot;).getValue(Integer.class); // 1</span><br><span class="line">        // Operator precedence</span><br><span class="line">        int minusTwentyOne = parser.parseExpression(&quot;1+2-3*8&quot;).getValue(Integer.class); // -21</span><br></pre></td></tr></table></figure>
+<p>基于 XML 配置定义 Bean<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;gyl&quot; class=&quot;com.ceshi.test.Spring053.spel01.User&quot; p:id=&quot;9527&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;name&quot; value=&quot;张三&quot;&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;order001&quot; class=&quot;com.ceshi.test.Spring053.spel01.Order&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;customer&quot; ref=&quot;gyl&quot;&gt;&lt;/property&gt;</span><br><span class="line">        &lt;property name=&quot;userName&quot; value=&quot;#&#123;gyl.name&#125;&quot;&gt;&lt;/property&gt;</span><br><span class="line">        &lt;property name=&quot;orderName&quot; value=&apos;#&#123;&quot;Apples&quot;.toUpperCase()&#125;&apos;&gt;&lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;numberGuess&quot; class=&quot;org.spring.samples.NumberGuess&quot;&gt;</span><br><span class="line">        &lt;!--调用静态方法random() --&gt;</span><br><span class="line">        &lt;property name=&quot;randomNumber&quot; value=&quot;#&#123; T(java.lang.Math).random() * 100.0 &#125;&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;taxCalculator&quot; class=&quot;org.spring.samples.TaxCalculator&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;defaultLocale&quot; value=&quot;#&#123; systemProperties[&apos;user.region&apos;] &#125;&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;numberGuess&quot; class=&quot;org.spring.samples.NumberGuess&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;randomNumber&quot; value=&quot;#&#123; T(java.lang.Math).random() * 100.0 &#125;&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    &lt;bean id=&quot;shapeGuess&quot; class=&quot;org.spring.samples.ShapeGuess&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;initialShapeSeed&quot; value=&quot;#&#123; numberGuess.randomNumber &#125;&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+<p>基于注解配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package com.ceshi.test.Spring053.spel03;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 用户类</span><br><span class="line"> */</span><br><span class="line">@Component(&quot;user1&quot;)</span><br><span class="line">public class User &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 编号</span><br><span class="line">     */</span><br><span class="line">    @Value(&quot;#&#123;9527+100&#125;&quot;)</span><br><span class="line">    private int id;</span><br><span class="line">    /**</span><br><span class="line">     * 姓名</span><br><span class="line">     */</span><br><span class="line">    @Value(&quot;#&#123;&apos;Hello&apos;.toUpperCase()&#125;&quot;)</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参见于：<a href="http://www.cnblogs.com/best/p/5748105.html" target="_blank" rel="noopener">http://www.cnblogs.com/best/p/5748105.html</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/15/Maven 常用命令/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Maven 常用命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/16/表达语言_jsp/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">表达式语言_ jsp</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="表达式语言_spring" data-title="表达式语言_ spring" data-url="http://yoursite.com/2017/09/17/表达式语言_spring/" data-images="/img/yzcxy.jpg" data-content="表达式语言_ spring">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+ 
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 一只程序猿
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+	
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+ 
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>html 转换成 pdf | 一只程序猿的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="不久前有个需求，需要将 html 格式文件转换成 PDF 格式文件，学习 java 的都知道，有个组件可以帮我们完成这项工作——itext。但是请注意的是（亲测）：itext 做简单的 html 转换还可以，但是如果页面相对比较复杂的时候，itext 表现的就不尽人意了。然后上网查阅，找到一个比较不错的工具——wkhtmltopdf，和大家分享下 官网地址戳这里 wkhtmltopdf 把 htm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="html 转换成 pdf">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/html 转换成 pdf/index.html">
+<meta property="og:site_name" content="一只程序猿的博客">
+<meta property="og:description" content="不久前有个需求，需要将 html 格式文件转换成 PDF 格式文件，学习 java 的都知道，有个组件可以帮我们完成这项工作——itext。但是请注意的是（亲测）：itext 做简单的 html 转换还可以，但是如果页面相对比较复杂的时候，itext 表现的就不尽人意了。然后上网查阅，找到一个比较不错的工具——wkhtmltopdf，和大家分享下 官网地址戳这里 wkhtmltopdf 把 htm">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-17T09:23:30.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="html 转换成 pdf">
+<meta name="twitter:description" content="不久前有个需求，需要将 html 格式文件转换成 PDF 格式文件，学习 java 的都知道，有个组件可以帮我们完成这项工作——itext。但是请注意的是（亲测）：itext 做简单的 html 转换还可以，但是如果页面相对比较复杂的时候，itext 表现的就不尽人意了。然后上网查阅，找到一个比较不错的工具——wkhtmltopdf，和大家分享下 官网地址戳这里 wkhtmltopdf 把 htm">
+  
+    <link rel="alternative" href="/atom.xml" title="一只程序猿的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("MW2iyQz6scY0XFrHP96SRKVb-gzGzoHsz", "9thbl1JAC6FeVjyjSEXHYBD1");</script>
+<script src="/js/Counter.js"></script>
+  
+</head></html>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/yzcxy.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">一只程序猿</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一切都是可以改变的，不可能只有庸人的词典里才有</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/hanfeng529264" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/hf529264@163.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="/2286670111" title="qq">qq</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/hanfeng0310" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://keveon.me">keveon.me</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pqsky.me">pqsky.me</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+	
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">一只程序猿</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/yzcxy.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">一只程序猿</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一切都是可以改变的，不可能只有庸人的词典里才有</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/hanfeng529264" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/hf529264@163.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="/2286670111" title="qq">qq</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/hanfeng0310" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-html 转换成 pdf" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/04/17/html 转换成 pdf/" class="article-date">
+  	<time datetime="2018-04-16T16:00:00.000Z" itemprop="datePublished">2018-04-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      html 转换成 pdf
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2018/04/17/html 转换成 pdf/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="html 转换成 pdf">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不久前有个需求，需要将 <code>html</code> 格式文件转换成 <code>PDF</code> 格式文件，学习 <code>java</code> 的都知道，有个组件可以帮我们完成这项工作——<code>itext</code>。<br>但是请注意的是（亲测）：<code>itext</code> 做简单的 <code>html</code> 转换还可以，但是如果页面相对比较复杂的时候，<code>itext</code> 表现的就不尽人意了。<br>然后上网查阅，找到一个比较不错的工具——<code>wkhtmltopdf</code>，和大家分享下</p>
+<p><a href="http://wkhtmltopdf.org/" target="_blank" rel="noopener">官网地址戳这里</a></p>
+<p><code>wkhtmltopdf</code> 把 <code>html</code> 转成 <code>pdf</code> 很简单，只要在 windows 命令行中输入<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:\wkhtmltopdf.exe http:<span class="comment">//www.baidu.com c:\cnblogs.pdf</span></span><br></pre></td></tr></table></figure></p>
+<p>就可以把百度网页转成pdf，并保存到C盘根目录（路径可以自己指定，这个不像多说什么）。<br>在 <code>Java</code> 中调用 <code>wkhtmltopdf</code> 的命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runtime.getRuntime().exec(<span class="string">"c:\wkhtmltopdf.exe http://www.cnblogs.com c:\cnblogs.pdf"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>就可以实现转换。<br>下面把命令封装成java工具类，方便调用。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.thunisoft.dzjz.material.converter.html;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> hanfeng on 2018-4-16.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 4.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Html2Pdf</span> </span>&#123;</span><br><span class="line">    <span class="comment">// wkhtmltopdf 在本地的安装路径</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String toPdfTool = <span class="string">"D:\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * html转pdf</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> srcPath html路径，可以是硬盘上的路径，也可以是网络路径</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> destPath pdf保存路径</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 转换成功返回true</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">convert</span><span class="params">(String srcPath, String destPath)</span></span>&#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(destPath);</span><br><span class="line">        File parent = file.getParentFile();</span><br><span class="line">        <span class="comment">//如果pdf保存路径不存在，则创建路径</span></span><br><span class="line">        <span class="keyword">if</span>(!parent.exists())&#123;</span><br><span class="line">            parent.mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        StringBuilder cmd = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        cmd.append(toPdfTool);</span><br><span class="line">        cmd.append(<span class="string">" "</span>); <span class="comment">//  注意  前后的这个空命令行不能删，否则会报错</span></span><br><span class="line"><span class="comment">//        cmd.append("--page-size A4 ");// 指定纸张大小</span></span><br><span class="line"><span class="comment">//        cmd.append("  --header-line");//页眉下面的线</span></span><br><span class="line"><span class="comment">//        cmd.append("  --header-center 这里是页眉这里是页眉这里是页眉这里是页眉 ");//页眉中间内容</span></span><br><span class="line">        <span class="comment">//设置页面上边距 (default 10mm)</span></span><br><span class="line">        cmd.append(<span class="string">"  --margin-top 0 "</span>);</span><br><span class="line">        cmd.append(<span class="string">"  --margin-bottom 0 "</span>);</span><br><span class="line">        cmd.append(<span class="string">"  --margin-left 0 "</span>);</span><br><span class="line">        cmd.append(<span class="string">"  --margin-right 0 "</span>);</span><br><span class="line"><span class="comment">//        cmd.append(" page background, #D48F44 ");</span></span><br><span class="line"><span class="comment">//        cmd.append(" --header-spacing 10 ");//    (设置页眉s和内容的距离,默认0)</span></span><br><span class="line">        cmd.append(srcPath);</span><br><span class="line">        cmd.append(<span class="string">" "</span>);</span><br><span class="line">        cmd.append(destPath);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> result = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Process proc = Runtime.getRuntime().exec(cmd.toString());</span><br><span class="line">            HtmlToPdfInterceptor error = <span class="keyword">new</span> HtmlToPdfInterceptor(proc.getErrorStream());</span><br><span class="line">            HtmlToPdfInterceptor output = <span class="keyword">new</span> HtmlToPdfInterceptor(proc.getInputStream());</span><br><span class="line">            error.start();</span><br><span class="line">            output.start();</span><br><span class="line">            proc.waitFor();</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            result = <span class="keyword">false</span>;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Html2Pdf.convert(<span class="string">"e:/123.html"</span>, <span class="string">"e:/wkhtmltopdf_535.pdf"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>用这种方式进行转换相对简单方便，但是会存在个小问题，就是你在 html 中指定了大小之后，转完 pdf 不一定会完全一样，存在些误差，需要自己在做下调整。但相对 <code>itext</code> 要舒服的多，毕竟借用了三方插件。</p>
+<ul>
+<li>最后 附上 <code>itext</code> 实现传换的代码和 wkhtmltopdf 参数详解<br><code>itext</code> demo：<br>1、 引入依赖<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.itextpdf<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>itextpdf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.itextpdf.tool<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>xmlworker<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>2、demo<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"> <span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">import</span> com.itextpdf.text.Document;</span><br><span class="line"> <span class="keyword">import</span> com.itextpdf.text.PageSize;</span><br><span class="line"> <span class="keyword">import</span> com.itextpdf.text.pdf.PdfWriter;</span><br><span class="line"> <span class="keyword">import</span> com.itextpdf.tool.xml.XMLWorkerHelper;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@author</span> hanfeng on 2018-4-16.</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@version</span> 4.0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HtmlToPDF</span> </span>&#123;</span><br><span class="line">   <span class="comment">// html 模板路径</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String HTML = <span class="string">"D:/123.htm"</span>;</span><br><span class="line">     <span class="comment">// pdf 保存路径</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String PDF = <span class="string">"D:/123.htm"</span>;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 测试</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 1</span></span><br><span class="line">       Document document = <span class="keyword">new</span> Document();</span><br><span class="line">       <span class="comment">// 2</span></span><br><span class="line">       PdfWriter writer = PdfWriter.getInstance(document, newFileOutputStream(PDF));</span><br><span class="line">       <span class="comment">// 3</span></span><br><span class="line">       document.open();</span><br><span class="line">       <span class="comment">// 4</span></span><br><span class="line">       XMLWorkerHelper.getInstance().parseXHtml(writer, document,<span class="keyword">new</span> FileInputStream(HTML));</span><br><span class="line">       <span class="comment">// 5</span></span><br><span class="line">        document.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>wkhtmltopdf 参数详解 ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">wkhtmltopdf [OPTIONS]... &lt;input file&gt; [More input files] &lt;output file&gt;</span><br><span class="line">常规选项</span><br><span class="line">     --allow &lt;path&gt;  允许加载从指定的文件夹中的文件或文件（可重复）</span><br><span class="line">    --book*  设置一会打印一本书的时候，通常设置的选项 </span><br><span class="line">     --collate  打印多份副本时整理 </span><br><span class="line">     --cookie &lt;name&gt; &lt;value&gt;  设置一个额外的cookie（可重复） </span><br><span class="line">     --cookie-jar &lt;path&gt;  读取和写入的Cookie，并在提供的cookie jar文件 </span><br><span class="line">     --copies &lt;number&gt;  复印打印成pdf文件数（默认为1） </span><br><span class="line">     --cover* &lt;url&gt;  使用HTML文件作为封面。它会带页眉和页脚的TOC之前插入 </span><br><span class="line">     --custom-header &lt;name&gt; &lt;value&gt;  设置一个附加的HTTP头（可重复） </span><br><span class="line">     --debug-javascript  显示的javascript调试输出 </span><br><span class="line">    --default-header*  添加一个缺省的头部，与页面的左边的名称，页面数到右边，例如： --header-left &apos;[webpage]&apos; --header-right &apos;[page]/[toPage]&apos;  --header-line </span><br><span class="line">     --disable-external-links*  禁止生成链接到远程网页</span><br><span class="line">     --disable-internal-links*  禁止使用本地链接</span><br><span class="line">    --disable-javascript  禁止让网页执行JavaScript </span><br><span class="line">     --disable-pdf-compression*  禁止在PDF对象使用无损压缩 </span><br><span class="line">     --disable-smart-shrinking*  禁止使用WebKit的智能战略收缩，使像素/ DPI比没有不变 </span><br><span class="line">     --disallow-local-file-access  禁止允许转换的本地文件读取其他本地文件，除非explecitily允许用 --allow </span><br><span class="line">    --dpi &lt;dpi&gt;  显式更改DPI（这对基于X11的系统没有任何影响） </span><br><span class="line">     --enable-plugins  启用已安装的插件（如Flash</span><br><span class="line">     --encoding &lt;encoding&gt;  设置默认的文字编码 </span><br><span class="line">     --extended-help  显示更广泛的帮助，详细介绍了不常见的命令开关 </span><br><span class="line">     --forms*  打开HTML表单字段转换为PDF表单域 </span><br><span class="line">    --grayscale  PDF格式将在灰阶产生</span><br><span class="line">    --help  Display help </span><br><span class="line">     --htmldoc  输出程序HTML帮助</span><br><span class="line">     --ignore-load-errors  忽略claimes加载过程中已经遇到了一个错误页面 </span><br><span class="line">    --lowquality  产生低品质的PDF/ PS。有用缩小结果文档的空间 </span><br><span class="line">     --manpage  输出程序手册页 </span><br><span class="line">    --margin-bottom &lt;unitreal&gt;  设置页面下边距 (default 10mm) </span><br><span class="line">    --margin-left &lt;unitreal&gt;  将左边页边距 (default 10mm) </span><br><span class="line">    --margin-right &lt;unitreal&gt;  设置页面右边距 (default 10mm) </span><br><span class="line">    --margin-top &lt;unitreal&gt;  设置页面上边距 (default 10mm) </span><br><span class="line">     --minimum-font-size &lt;int&gt;  最小字体大小 (default 5) </span><br><span class="line">     --no-background  不打印背景</span><br><span class="line">    --orientation &lt;orientation&gt;  设置方向为横向或纵向 </span><br><span class="line">     --page-height &lt;unitreal&gt;  页面高度 (default unit millimeter) </span><br><span class="line">     --page-offset* &lt;offset&gt;  设置起始页码 (default 1) </span><br><span class="line">    --page-size &lt;size&gt;  设置纸张大小: A4, Letter, etc. </span><br><span class="line">    --page-width &lt;unitreal&gt;  页面宽度 (default unit millimeter) </span><br><span class="line">     --password &lt;password&gt;  HTTP验证密码 </span><br><span class="line">     --post &lt;name&gt; &lt;value&gt;  Add an additional post field (repeatable) </span><br><span class="line">     --post-file &lt;name&gt; &lt;path&gt;  Post an aditional file (repeatable) </span><br><span class="line">     --print-media-type*  使用的打印介质类型，而不是屏幕 </span><br><span class="line">    --proxy &lt;proxy&gt;  使用代理 </span><br><span class="line">    --quiet  Be less verbose </span><br><span class="line">    --read-args-from-stdin  读取标准输入的命令行参数 </span><br><span class="line">    --readme  输出程序自述</span><br><span class="line">    --redirect-delay &lt;msec&gt;  等待几毫秒为JS-重定向(default 200) </span><br><span class="line">    --replace* &lt;name&gt; &lt;value&gt;  替换名称,值的页眉和页脚（可重复） </span><br><span class="line">    --stop-slow-scripts  停止运行缓慢的JavaScripts </span><br><span class="line">    --title &lt;text&gt;  生成的PDF文件的标题（第一个文档的标题使用，如果没有指定） </span><br><span class="line">    --toc*  插入的内容的表中的文件的开头</span><br><span class="line">    --use-xserver*  使用X服务器（一些插件和其他的东西没有X11可能无法正常工作） </span><br><span class="line">    --user-style-sheet &lt;url&gt;  指定用户的样式表，加载在每一页中</span><br><span class="line">    --username &lt;username&gt;  HTTP认证的用户名 </span><br><span class="line">    --version  输出版本信息退出</span><br><span class="line">     --zoom &lt;float&gt;  使用这个缩放因子 (default 1) </span><br><span class="line"></span><br><span class="line">页眉和页脚选项</span><br><span class="line">--header-center*    &lt;text&gt;    (设置在中心位置的页眉内容)  </span><br><span class="line">--header-font-name* &lt;name&gt;    (default Arial)  (设置页眉的字体名称)</span><br><span class="line">--header-font-size* &lt;size&gt;    (设置页眉的字体大小)</span><br><span class="line">--header-html*  &lt;url&gt; (添加一个HTML页眉,后面是网址)</span><br><span class="line">--header-left*  &lt;text&gt;   (左对齐的页眉文本)</span><br><span class="line">--header-line*      (显示一条线在页眉下)</span><br><span class="line">--header-right* &lt;text&gt;    (右对齐页眉文本)</span><br><span class="line">--header-spacing*   &lt;real&gt;    (设置页眉和内容的距离,默认0)</span><br><span class="line">--footer-center*    &lt;text&gt;    (设置在中心位置的页脚内容)  </span><br><span class="line">--footer-font-name* &lt;name&gt;    (设置页脚的字体名称) </span><br><span class="line">--footer-font-size* &lt;size&gt;    (设置页脚的字体大小default 11)</span><br><span class="line">--footer-html*  &lt;url&gt; (添加一个HTML页脚,后面是网址)</span><br><span class="line">--footer-left*  &lt;text&gt;    (左对齐的页脚文本)</span><br><span class="line">--footer-line*      显示一条线在页脚内容上)</span><br><span class="line">--footer-right* &lt;text&gt;    (右对齐页脚文本)</span><br><span class="line">--footer-spacing*   &lt;real&gt;    (设置页脚和内容的距离)</span><br><span class="line">./wkhtmltopdf --footer-right &apos;[page]/[topage]&apos; http://www.baidu.com baidu.pdf</span><br><span class="line">./wkhtmltopdf --header-center &apos;报表&apos; --header-line --margin-top 2cm --header-line http://192.168.212.139/oma/  oma.pdf</span><br><span class="line">表内容选项中</span><br><span class="line"> --toc-depth* &lt;level&gt;  Set the depth of the toc (default 3) </span><br><span class="line"> --toc-disable-back-links*  Do not link from section header to toc </span><br><span class="line"> --toc-disable-links*  Do not link from toc to sections </span><br><span class="line"> --toc-font-name* &lt;name&gt;  Set the font used for the toc (default Arial) </span><br><span class="line"> --toc-header-font-name* &lt;name&gt;  The font of the toc header (if unset use --toc-font-name) </span><br><span class="line"> --toc-header-font-size* &lt;size&gt;  The font size of the toc header (default 15) </span><br><span class="line"> --toc-header-text* &lt;text&gt;  The header text of the toc (default Table Of Contents) </span><br><span class="line"> --toc-l1-font-size* &lt;size&gt;  Set the font size on level 1 of the toc (default 12) </span><br><span class="line"> --toc-l1-indentation* &lt;num&gt;  Set indentation on level 1 of the toc (default 0) </span><br><span class="line"> --toc-l2-font-size* &lt;size&gt;  Set the font size on level 2 of the toc (default 10) </span><br><span class="line"> --toc-l2-indentation* &lt;num&gt;  Set indentation on level 2 of the toc (default 20) </span><br><span class="line"> --toc-l3-font-size* &lt;size&gt;  Set the font size on level 3 of the toc (default 8) </span><br><span class="line"> --toc-l3-indentation* &lt;num&gt;  Set indentation on level 3 of the toc (default 40) </span><br><span class="line"> --toc-l4-font-size* &lt;size&gt;  Set the font size on level 4 of the toc (default 6) </span><br><span class="line"> --toc-l4-indentation* &lt;num&gt;  Set indentation on level 4 of the toc (default 60) </span><br><span class="line"> --toc-l5-font-size* &lt;size&gt;  Set the font size on level 5 of the toc (default 4) </span><br><span class="line"> --toc-l5-indentation* &lt;num&gt;  Set indentation on level 5 of the toc (default 80) </span><br><span class="line"> --toc-l6-font-size* &lt;size&gt;  Set the font size on level 6 of the toc (default 2) </span><br><span class="line"> --toc-l6-indentation* &lt;num&gt;  Set indentation on level 6 of the toc (default 100) </span><br><span class="line"> --toc-l7-font-size* &lt;size&gt;  Set the font size on level 7 of the toc (default 0) </span><br><span class="line"> --toc-l7-indentation* &lt;num&gt;  Set indentation on level 7 of the toc (default 120) </span><br><span class="line"> --toc-no-dots*  Do not use dots, in the toc</span><br><span class="line">轮廓选项</span><br><span class="line"> --dump-outline &lt;file&gt;  转储目录到一个文件</span><br><span class="line"> --outline  显示目录(文章中h1,h2来定)</span><br><span class="line"> --outline-depth &lt;level&gt;  设置目录的深度（默认为4）</span><br><span class="line">页脚和页眉</span><br><span class="line"> * [page]       由当前正在打印的页的数目代替</span><br><span class="line"> * [frompage]   由要打印的第一页的数量取代</span><br><span class="line"> * [topage]     由最后一页要打印的数量取代</span><br><span class="line"> * [webpage]    通过正在打印的页面的URL替换</span><br><span class="line"> * [section]    由当前节的名称替换</span><br><span class="line"> * [subsection] 由当前小节的名称替换</span><br><span class="line"> * [date]       由当前日期系统的本地格式取代</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/04/JNDI 是什么/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          JNDI 是什么
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/14/Spring AOP的实现原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring AOP的实现原理</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="html 转换成 pdf" data-title="html 转换成 pdf" data-url="http://yoursite.com/2018/04/17/html 转换成 pdf/" data-images="/img/yzcxy.jpg" data-content="html 转换成 pdf">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+ 
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 一只程序猿
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+	
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+ 
+</body>
+</html>

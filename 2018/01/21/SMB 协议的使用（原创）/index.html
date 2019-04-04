@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>SMB 协议的使用（原创） | 一只程序猿的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、什么是 SMBSMB（Server Message Block）通信协议是微软（Microsoft）和英特尔(Intel)在1987年制定的协议，主要是作为Microsoft网络的通讯协议。SMB 是在会话层（session layer）和表示层（presentation layer）以及小部分应用层（application layer）的协议。 SMB使用了NetBIOS的应用程序接口 （A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SMB 协议的使用（原创）">
+<meta property="og:url" content="http://yoursite.com/2018/01/21/SMB 协议的使用（原创）/index.html">
+<meta property="og:site_name" content="一只程序猿的博客">
+<meta property="og:description" content="1、什么是 SMBSMB（Server Message Block）通信协议是微软（Microsoft）和英特尔(Intel)在1987年制定的协议，主要是作为Microsoft网络的通讯协议。SMB 是在会话层（session layer）和表示层（presentation layer）以及小部分应用层（application layer）的协议。 SMB使用了NetBIOS的应用程序接口 （A">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/smb_1.png">
+<meta property="og:image" content="http://yoursite.com/img/smb_2.png">
+<meta property="og:image" content="http://yoursite.com/img/smb_3.png">
+<meta property="og:image" content="http://yoursite.com/img/smb_4.png">
+<meta property="og:image" content="http://yoursite.com/img/smb_5.png">
+<meta property="og:image" content="http://yoursite.com/img/smb_6.png">
+<meta property="og:updated_time" content="2018-03-23T07:37:21.444Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SMB 协议的使用（原创）">
+<meta name="twitter:description" content="1、什么是 SMBSMB（Server Message Block）通信协议是微软（Microsoft）和英特尔(Intel)在1987年制定的协议，主要是作为Microsoft网络的通讯协议。SMB 是在会话层（session layer）和表示层（presentation layer）以及小部分应用层（application layer）的协议。 SMB使用了NetBIOS的应用程序接口 （A">
+<meta name="twitter:image" content="http://yoursite.com/img/smb_1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="一只程序猿的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("MW2iyQz6scY0XFrHP96SRKVb-gzGzoHsz", "9thbl1JAC6FeVjyjSEXHYBD1");</script>
+<script src="/js/Counter.js"></script>
+  
+</head></html>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/yzcxy.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">一只程序猿</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一切都是可以改变的，不可能只有庸人的词典里才有</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/hanfeng529264" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/hf529264@163.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="/2286670111" title="qq">qq</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/hanfeng0310" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://keveon.me">keveon.me</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pqsky.me">pqsky.me</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+	
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">一只程序猿</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/yzcxy.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">一只程序猿</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一切都是可以改变的，不可能只有庸人的词典里才有</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/hanfeng529264" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/hf529264@163.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="/2286670111" title="qq">qq</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/hanfeng0310" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-SMB 协议的使用（原创）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/21/SMB 协议的使用（原创）/" class="article-date">
+  	<time datetime="2018-01-20T16:00:00.000Z" itemprop="datePublished">2018-01-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SMB 协议的使用（原创）
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2018/01/21/SMB 协议的使用（原创）/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="SMB 协议的使用（原创）">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、什么是-SMB"><a href="#1、什么是-SMB" class="headerlink" title="1、什么是 SMB"></a>1、什么是 SMB</h2><p><a href="https://baike.baidu.com/item/SMB%E5%8D%8F%E8%AE%AE/3770892?fr=aladdin" target="_blank" rel="noopener">SMB</a>（Server Message Block）通信协议是微软（Microsoft）和英特尔(Intel)在1987年制定的协议，主要是作为Microsoft网络的通讯协议。SMB 是在会话层（session layer）和表示层（presentation layer）以及小部分应用层（application layer）的协议。</p>
+<p>SMB使用了NetBIOS的应用程序接口 （Application Program Interface，简称API）。另外，它是一个开放性的协议，允许了协议扩展——使得它变得更大而且复杂；大约有65个最上层的作业，而每个作业都超过120个函数，甚至Windows NT也没有全部支持到，最近微软又把 SMB 改名为 CIFS（Common Internet File System），并且加入了许多新的特色。</p>
+<h2 id="2、为什么使用-SMB-协议实现文件的读取"><a href="#2、为什么使用-SMB-协议实现文件的读取" class="headerlink" title="2、为什么使用 SMB 协议实现文件的读取"></a>2、为什么使用 SMB 协议实现文件的读取</h2><p>其实 SMB 协议使用非常简单，它方便了我们对共享文件（夹）的操作，我们不在需要知道具体的盘符，只要知道 IP（地址） PORT（端口） Folder（共享文件夹）即可。</p>
+<h2 id="3、SMB协议的两种连接方式"><a href="#3、SMB协议的两种连接方式" class="headerlink" title="3、SMB协议的两种连接方式"></a>3、SMB协议的两种连接方式</h2><ul>
+<li>1、访问和验证登录信息写在一起<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smb://&#123;user&#125;:&#123;password&#125;@&#123;host&#125;/&#123;path&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">user</td>
+<td style="text-align:left">用户名（一般都是登录服务器所需的用户名）</td>
+</tr>
+<tr>
+<td style="text-align:left">password</td>
+<td style="text-align:left">密码（一般都是登录服务器所需的密码，和用户名配套）</td>
+</tr>
+<tr>
+<td style="text-align:left">host</td>
+<td style="text-align:left">服务器ip</td>
+</tr>
+<tr>
+<td style="text-align:left">path</td>
+<td style="text-align:left">要访问的资源名</td>
+</tr>
+</tbody>
+</table>
+<p>eg：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String url=&quot;smb://hanfeng:123@192.168.0.22/share&quot;;</span><br><span class="line">SmbFile smbFile = new SmbFile(url);</span><br></pre></td></tr></table></figure></p>
+<p>注意：这种方式存在一个坑，当你的用户名或者密码中存在特殊字符时，解析会有问题，<br>比如像我们通用的密码会有个 @ 符号，但是在 SmbFile  解析时，这个 @ 符号后面跟的应该是 host，这样就导致他解析的结果和我们实际想要连接的不符。<br>那么它是怎们解析的url呢？<br>SmbFile 中包含的方法：</p>
+<p><img src="/img/smb_1.png" alt="2"></p>
+<p><img src="/img/smb_2.png" alt="3"></p>
+<p><img src="/img/smb_3.png" alt="4"></p>
+<p>SmbFile  我们所使用的构造器的源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public SmbFile( String url ) throws MalformedURLException &#123;</span><br><span class="line">        this( new URL( null, url, Handler.SMB_HANDLER ));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>URL 源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">public URL(URL context, String spec, URLStreamHandler handler)</span><br><span class="line">        throws MalformedURLException</span><br><span class="line">    &#123;</span><br><span class="line">        String original = spec;</span><br><span class="line">        int i, limit, c;</span><br><span class="line">        int start = 0;</span><br><span class="line">        String newProtocol = null;</span><br><span class="line">        boolean aRef=false;</span><br><span class="line">        boolean isRelative = false;</span><br><span class="line"></span><br><span class="line">        // Check for permission to specify a handler</span><br><span class="line">        if (handler != null) &#123;</span><br><span class="line">            SecurityManager sm = System.getSecurityManager();</span><br><span class="line">            if (sm != null) &#123;</span><br><span class="line">                checkSpecifyHandler(sm);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            limit = spec.length();</span><br><span class="line">            while ((limit &gt; 0) &amp;&amp; (spec.charAt(limit - 1) &lt;= &apos; &apos;)) &#123;</span><br><span class="line">                limit--;        //eliminate trailing whitespace</span><br><span class="line">            &#125;</span><br><span class="line">            while ((start &lt; limit) &amp;&amp; (spec.charAt(start) &lt;= &apos; &apos;)) &#123;</span><br><span class="line">                start++;        // eliminate leading whitespace</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (spec.regionMatches(true, start, &quot;url:&quot;, 0, 4)) &#123;</span><br><span class="line">                start += 4;</span><br><span class="line">            &#125;</span><br><span class="line">            if (start &lt; spec.length() &amp;&amp; spec.charAt(start) == &apos;#&apos;) &#123;</span><br><span class="line">                /* we&apos;re assuming this is a ref relative to the context URL.</span><br><span class="line">                 * This means protocols cannot start w/ &apos;#&apos;, but we must parse</span><br><span class="line">                 * ref URL&apos;s like: &quot;hello:there&quot; w/ a &apos;:&apos; in them.</span><br><span class="line">                 */</span><br><span class="line">                aRef=true;</span><br><span class="line">            &#125;</span><br><span class="line">            for (i = start ; !aRef &amp;&amp; (i &lt; limit) &amp;&amp;</span><br><span class="line">                     ((c = spec.charAt(i)) != &apos;/&apos;) ; i++) &#123;</span><br><span class="line">                if (c == &apos;:&apos;) &#123;</span><br><span class="line"></span><br><span class="line">                    String s = spec.substring(start, i).toLowerCase();</span><br><span class="line">                    if (isValidProtocol(s)) &#123;</span><br><span class="line">                        newProtocol = s;</span><br><span class="line">                        start = i + 1;</span><br><span class="line">                    &#125;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // Only use our context if the protocols match.</span><br><span class="line">            protocol = newProtocol;</span><br><span class="line">            if ((context != null) &amp;&amp; ((newProtocol == null) ||</span><br><span class="line">                            newProtocol.equalsIgnoreCase(context.protocol))) &#123;</span><br><span class="line">                // inherit the protocol handler from the context</span><br><span class="line">                // if not specified to the constructor</span><br><span class="line">                if (handler == null) &#123;</span><br><span class="line">                    handler = context.handler;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                // If the context is a hierarchical URL scheme and the spec</span><br><span class="line">                // contains a matching scheme then maintain backwards</span><br><span class="line">                // compatibility and treat it as if the spec didn&apos;t contain</span><br><span class="line">                // the scheme; see 5.2.3 of RFC2396</span><br><span class="line">                if (context.path != null &amp;&amp; context.path.startsWith(&quot;/&quot;))</span><br><span class="line">                    newProtocol = null;</span><br><span class="line"></span><br><span class="line">                if (newProtocol == null) &#123;</span><br><span class="line">                    protocol = context.protocol;</span><br><span class="line">                    authority = context.authority;</span><br><span class="line">                    userInfo = context.userInfo;</span><br><span class="line">                    host = context.host;</span><br><span class="line">                    port = context.port;</span><br><span class="line">                    file = context.file;</span><br><span class="line">                    path = context.path;</span><br><span class="line">                    isRelative = true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (protocol == null) &#123;</span><br><span class="line">                throw new MalformedURLException(&quot;no protocol: &quot;+original);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // Get the protocol handler if not specified or the protocol</span><br><span class="line">            // of the context could not be used</span><br><span class="line">            if (handler == null &amp;&amp;</span><br><span class="line">                (handler = getURLStreamHandler(protocol)) == null) &#123;</span><br><span class="line">                throw new MalformedURLException(&quot;unknown protocol: &quot;+protocol);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            this.handler = handler;</span><br><span class="line"></span><br><span class="line">            i = spec.indexOf(&apos;#&apos;, start);</span><br><span class="line">            if (i &gt;= 0) &#123;</span><br><span class="line">                ref = spec.substring(i + 1, limit);</span><br><span class="line">                limit = i;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            /*</span><br><span class="line">             * Handle special case inheritance of query and fragment</span><br><span class="line">             * implied by RFC2396 section 5.2.2.</span><br><span class="line">             */</span><br><span class="line">            if (isRelative &amp;&amp; start == limit) &#123;</span><br><span class="line">                query = context.query;</span><br><span class="line">                if (ref == null) &#123;</span><br><span class="line">                    ref = context.ref;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            handler.parseURL(this, spec, start, limit);</span><br><span class="line"></span><br><span class="line">        &#125; catch(MalformedURLException e) &#123;</span><br><span class="line">            throw e;</span><br><span class="line">        &#125; catch(Exception e) &#123;</span><br><span class="line">            MalformedURLException exception = new MalformedURLException(e.getMessage());</span><br><span class="line">            exception.initCause(e);</span><br><span class="line">            throw exception;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>parseURL 源码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br></pre></td><td class="code"><pre><span class="line">protected void parseURL(URL u, String spec, int start, int limit) &#123;</span><br><span class="line">        // These fields may receive context content if this was relative URL</span><br><span class="line">        String protocol = u.getProtocol();</span><br><span class="line">        String authority = u.getAuthority();</span><br><span class="line">        String userInfo = u.getUserInfo();</span><br><span class="line">        String host = u.getHost();</span><br><span class="line">        int port = u.getPort();</span><br><span class="line">        String path = u.getPath();</span><br><span class="line">        String query = u.getQuery();</span><br><span class="line"></span><br><span class="line">        // This field has already been parsed</span><br><span class="line">        String ref = u.getRef();</span><br><span class="line"></span><br><span class="line">        boolean isRelPath = false;</span><br><span class="line">        boolean queryOnly = false;</span><br><span class="line"></span><br><span class="line">// FIX: should not assume query if opaque</span><br><span class="line">        // Strip off the query part</span><br><span class="line">        if (start &lt; limit) &#123;</span><br><span class="line">            int queryStart = spec.indexOf(&apos;?&apos;);     // 这里——hf</span><br><span class="line">            queryOnly = queryStart == start;</span><br><span class="line">            if ((queryStart != -1) &amp;&amp; (queryStart &lt; limit)) &#123;</span><br><span class="line">                query = spec.substring(queryStart+1, limit);</span><br><span class="line">                if (limit &gt; queryStart)</span><br><span class="line">                    limit = queryStart;</span><br><span class="line">                spec = spec.substring(0, queryStart);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int i = 0;</span><br><span class="line">        // Parse the authority part if any</span><br><span class="line">        boolean isUNCName = (start &lt;= limit - 4) &amp;&amp;</span><br><span class="line">                        (spec.charAt(start) == &apos;/&apos;) &amp;&amp;</span><br><span class="line">                        (spec.charAt(start + 1) == &apos;/&apos;) &amp;&amp;</span><br><span class="line">                        (spec.charAt(start + 2) == &apos;/&apos;) &amp;&amp;</span><br><span class="line">                        (spec.charAt(start + 3) == &apos;/&apos;);   // 这里——hf</span><br><span class="line">        if (!isUNCName &amp;&amp; (start &lt;= limit - 2) &amp;&amp; (spec.charAt(start) == &apos;/&apos;) &amp;&amp;</span><br><span class="line">            (spec.charAt(start + 1) == &apos;/&apos;)) &#123;</span><br><span class="line">            start += 2;</span><br><span class="line">            i = spec.indexOf(&apos;/&apos;, start);</span><br><span class="line">            if (i &lt; 0) &#123;</span><br><span class="line">                i = spec.indexOf(&apos;?&apos;, start);</span><br><span class="line">                if (i &lt; 0)</span><br><span class="line">                    i = limit;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            host = authority = spec.substring(start, i);</span><br><span class="line"></span><br><span class="line">            int ind = authority.indexOf(&apos;@&apos;);  // 这里——hf</span><br><span class="line">            if (ind != -1) &#123;</span><br><span class="line">                userInfo = authority.substring(0, ind);</span><br><span class="line">                host = authority.substring(ind+1);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                userInfo = null;</span><br><span class="line">            &#125;</span><br><span class="line">            if (host != null) &#123;</span><br><span class="line">                // If the host is surrounded by [ and ] then its an IPv6</span><br><span class="line">                // literal address as specified in RFC2732</span><br><span class="line">                if (host.length()&gt;0 &amp;&amp; (host.charAt(0) == &apos;[&apos;)) &#123;</span><br><span class="line">                    if ((ind = host.indexOf(&apos;]&apos;)) &gt; 2) &#123;</span><br><span class="line"></span><br><span class="line">                        String nhost = host ;</span><br><span class="line">                        host = nhost.substring(0,ind+1);</span><br><span class="line">                        if (!IPAddressUtil.</span><br><span class="line">                            isIPv6LiteralAddress(host.substring(1, ind))) &#123;</span><br><span class="line">                            throw new IllegalArgumentException(</span><br><span class="line">                                &quot;Invalid host: &quot;+ host);</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        port = -1 ;</span><br><span class="line">                        if (nhost.length() &gt; ind+1) &#123;</span><br><span class="line">                            if (nhost.charAt(ind+1) == &apos;:&apos;) &#123;</span><br><span class="line">                                ++ind ;</span><br><span class="line">                                // port can be null according to RFC2396</span><br><span class="line">                                if (nhost.length() &gt; (ind + 1)) &#123;</span><br><span class="line">                                    port = Integer.parseInt(nhost.substring(ind+1));</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125; else &#123;</span><br><span class="line">                                throw new IllegalArgumentException(</span><br><span class="line">                                    &quot;Invalid authority field: &quot; + authority);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        throw new IllegalArgumentException(</span><br><span class="line">                            &quot;Invalid authority field: &quot; + authority);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ind = host.indexOf(&apos;:&apos;);</span><br><span class="line">                    port = -1;</span><br><span class="line">                    if (ind &gt;= 0) &#123;</span><br><span class="line">                        // port can be null according to RFC2396</span><br><span class="line">                        if (host.length() &gt; (ind + 1)) &#123;</span><br><span class="line">                            port = Integer.parseInt(host.substring(ind + 1));</span><br><span class="line">                        &#125;</span><br><span class="line">                        host = host.substring(0, ind);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                host = &quot;&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            if (port &lt; -1)</span><br><span class="line">                throw new IllegalArgumentException(&quot;Invalid port number :&quot; +</span><br><span class="line">                                                   port);</span><br><span class="line">            start = i;</span><br><span class="line">            // If the authority is defined then the path is defined by the</span><br><span class="line">            // spec only; See RFC 2396 Section 5.2.4.</span><br><span class="line">            if (authority != null &amp;&amp; authority.length() &gt; 0)</span><br><span class="line">                path = &quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (host == null) &#123;</span><br><span class="line">            host = &quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Parse the file path if any</span><br><span class="line">        if (start &lt; limit) &#123;</span><br><span class="line">            if (spec.charAt(start) == &apos;/&apos;) &#123;</span><br><span class="line">                path = spec.substring(start, limit);</span><br><span class="line">            &#125; else if (path != null &amp;&amp; path.length() &gt; 0) &#123;</span><br><span class="line">                isRelPath = true;</span><br><span class="line">                int ind = path.lastIndexOf(&apos;/&apos;);</span><br><span class="line">                String seperator = &quot;&quot;;</span><br><span class="line">                if (ind == -1 &amp;&amp; authority != null)</span><br><span class="line">                    seperator = &quot;/&quot;;</span><br><span class="line">                path = path.substring(0, ind + 1) + seperator +</span><br><span class="line">                         spec.substring(start, limit);</span><br><span class="line"></span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                String seperator = (authority != null) ? &quot;/&quot; : &quot;&quot;;</span><br><span class="line">                path = seperator + spec.substring(start, limit);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else if (queryOnly &amp;&amp; path != null) &#123;</span><br><span class="line">            int ind = path.lastIndexOf(&apos;/&apos;);</span><br><span class="line">            if (ind &lt; 0)</span><br><span class="line">                ind = 0;</span><br><span class="line">            path = path.substring(0, ind) + &quot;/&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        if (path == null)</span><br><span class="line">            path = &quot;&quot;;</span><br><span class="line"></span><br><span class="line">        if (isRelPath) &#123;</span><br><span class="line">            // Remove embedded /./</span><br><span class="line">            while ((i = path.indexOf(&quot;/./&quot;)) &gt;= 0) &#123;</span><br><span class="line">                path = path.substring(0, i) + path.substring(i + 2);</span><br><span class="line">            &#125;</span><br><span class="line">            // Remove embedded /../ if possible</span><br><span class="line">            i = 0;</span><br><span class="line">            while ((i = path.indexOf(&quot;/../&quot;, i)) &gt;= 0) &#123;</span><br><span class="line">                /*</span><br><span class="line">                 * A &quot;/../&quot; will cancel the previous segment and itself,</span><br><span class="line">                 * unless that segment is a &quot;/../&quot; itself</span><br><span class="line">                 * i.e. &quot;/a/b/../c&quot; becomes &quot;/a/c&quot;</span><br><span class="line">                 * but &quot;/../../a&quot; should stay unchanged</span><br><span class="line">                 */</span><br><span class="line">                if (i &gt; 0 &amp;&amp; (limit = path.lastIndexOf(&apos;/&apos;, i - 1)) &gt;= 0 &amp;&amp;</span><br><span class="line">                    (path.indexOf(&quot;/../&quot;, limit) != 0)) &#123;</span><br><span class="line">                    path = path.substring(0, limit) + path.substring(i + 3);</span><br><span class="line">                    i = 0;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    i = i + 3;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            // Remove trailing .. if possible</span><br><span class="line">            while (path.endsWith(&quot;/..&quot;)) &#123;</span><br><span class="line">                i = path.indexOf(&quot;/..&quot;);</span><br><span class="line">                if ((limit = path.lastIndexOf(&apos;/&apos;, i - 1)) &gt;= 0) &#123;</span><br><span class="line">                    path = path.substring(0, limit+1);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            // Remove starting .</span><br><span class="line">            if (path.startsWith(&quot;./&quot;) &amp;&amp; path.length() &gt; 2)</span><br><span class="line">                path = path.substring(2);</span><br><span class="line"></span><br><span class="line">            // Remove trailing .</span><br><span class="line">            if (path.endsWith(&quot;/.&quot;))</span><br><span class="line">                path = path.substring(0, path.length() -1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setURL(u, protocol, host, port, authority, userInfo, path, query, ref);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到上面注释 “这里——hf” 的地方，特殊符号是写死的。这就是为什么特殊字符会有坑的存在。</p>
+<ul>
+<li>2 访问和验证登录信息分开<br>分别定义 userInfo 和 url。<br>eg：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String userName = &quot;hanfeng&quot;;</span><br><span class="line">String passWord = &quot;123&quot;;</span><br><span class="line">String domainIp = &quot;172.16.192.156&quot;;</span><br><span class="line">String url = &quot;Smb://172.16.192.156/share&quot;;</span><br><span class="line">NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(domainIp, userName, passWord);</span><br><span class="line">SmbFile smbFile = new SmbFile(url, auth);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>构造器源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public SmbFile( String url, NtlmPasswordAuthentication auth )</span><br><span class="line">                    throws MalformedURLException &#123;</span><br><span class="line">        this( new URL( null, url, Handler.SMB_HANDLER ), auth );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>this调用的源：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public SmbFile( URL url, NtlmPasswordAuthentication auth ) &#123;</span><br><span class="line">        super( url );</span><br><span class="line">        this.auth = auth == null ? new NtlmPasswordAuthentication( url.getUserInfo() ) : auth;</span><br><span class="line"></span><br><span class="line">        getUncPath0();</span><br><span class="line">    &#125;</span><br><span class="line">    SmbFile( SmbFile context, String name, int type,</span><br><span class="line">                int attributes, long createTime, long lastModified, long size )</span><br><span class="line">                throws MalformedURLException, UnknownHostException &#123;</span><br><span class="line">        this( context.isWorkgroup0() ?</span><br><span class="line">            new URL( null, &quot;smb://&quot; + name + &quot;/&quot;, Handler.SMB_HANDLER ) :</span><br><span class="line">            new URL( context.url, name + (( attributes &amp; ATTR_DIRECTORY ) &gt; 0 ? &quot;/&quot; : &quot;&quot; )));</span><br><span class="line"></span><br><span class="line">        /* why was this removed before? DFS? copyTo? Am I going around in circles? */</span><br><span class="line">        auth = context.auth;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        if( context.share != null ) &#123;</span><br><span class="line">            this.tree = context.tree;</span><br><span class="line">            this.dfsReferral = context.dfsReferral;</span><br><span class="line">        &#125;</span><br><span class="line">        int last = name.length() - 1;</span><br><span class="line">        if( name.charAt( last ) == &apos;/&apos; ) &#123;</span><br><span class="line">            name = name.substring( 0, last );</span><br><span class="line">        &#125;</span><br><span class="line">        if( context.share == null ) &#123;</span><br><span class="line">            this.unc = &quot;\\&quot;;</span><br><span class="line">        &#125; else if( context.unc.equals( &quot;\\&quot; )) &#123;</span><br><span class="line">            this.unc = &apos;\\&apos; + name;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            this.unc = context.unc + &apos;\\&apos; + name;</span><br><span class="line">        &#125;</span><br><span class="line">    /* why? am I going around in circles?</span><br><span class="line">     *  this.type = type == TYPE_WORKGROUP ? 0 : type;</span><br><span class="line">     */</span><br><span class="line">        this.type = type;</span><br><span class="line">        this.attributes = attributes;</span><br><span class="line">        this.createTime = createTime;</span><br><span class="line">        this.lastModified = lastModified;</span><br><span class="line">        this.size = size;</span><br><span class="line">        isExists = true;</span><br><span class="line"></span><br><span class="line">        attrExpiration = sizeExpiration =</span><br><span class="line">                System.currentTimeMillis() + attrExpirationPeriod;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="4、实现文件的读写"><a href="#4、实现文件的读写" class="headerlink" title="4、实现文件的读写"></a>4、实现文件的读写</h2><p>那么上面我们已将连接好了我们想要连接的服务器目录，如何实现文件的读写呢？<br>要实现读写要有个前提，就是在目标服务器上给我们当前使用用户授予读写的权限，否则是会出问题的。</p>
+<p>一般我们读取文件都是用 FileInputStream，那么smbFile可不可以使用 FileInputStream来读取呢？<br><img src="/img/smb_4.png" alt="6"></p>
+<p>那么怎么解决？？？？？</p>
+<p>在 InputStream 下有个子类（非 jdk 提供，或者可以说是个人实现的），叫 <code>SmbFileInputStream</code><br>我们来试下这个是不是好用：<br><img src="/img/smb_5.png" alt="7"><br>没有问题，是可以的，我们来看下 <code>SmbFileInputStream</code> 的实现：</p>
+<p><img src="/img/smb_6.png" alt="8"><br>我们可以清楚的看到 <code>SmbFileInputStream</code> 实际上也是继承了 <code>InputStream</code>。<br> 这样我们就可以根绝我们熟悉的 InputStream  去操作流了。</p>
+<p> 但是  SmbFile 不能用并发来实现，因为没有意义，他的底层全部使用了 <code>synchronized</code> ，即使你用并发，也是放在队列里，一条一条处理。想了解细节的可以去看下源码，这里就不过多说了。</p>
+<h2 id="5、最后附上完整的读写示例代码："><a href="#5、最后附上完整的读写示例代码：" class="headerlink" title="5、最后附上完整的读写示例代码："></a>5、最后附上完整的读写示例代码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">package com.thunisoft.fy.dzjz.fiveimport.service;</span><br><span class="line"></span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.io.OutputStream;</span><br><span class="line"></span><br><span class="line">import jcifs.smb.NtlmPasswordAuthentication;</span><br><span class="line">import jcifs.smb.SmbFile;</span><br><span class="line">import jcifs.smb.SmbFileInputStream;</span><br><span class="line">import jcifs.smb.SmbFileOutputStream;</span><br><span class="line"></span><br><span class="line">import org.apache.commons.io.IOUtils;</span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line"></span><br><span class="line">public class SmbFileRead &#123;</span><br><span class="line"></span><br><span class="line">    /**smb协议头*/</span><br><span class="line">    private final String SMB_URL_TOP = &quot;smb://&quot;;</span><br><span class="line"></span><br><span class="line">    /**用户名*/</span><br><span class="line">    private final String SMB_USER = &quot;hanfeng&quot;;</span><br><span class="line"></span><br><span class="line">    /**斜杠*/</span><br><span class="line">    private final String SMB_URL_SLANSH = &quot;/&quot;;</span><br><span class="line"></span><br><span class="line">    /**密码*/</span><br><span class="line">    private final String SMB_PASSWORD = &quot;123&quot;;</span><br><span class="line"></span><br><span class="line">    /**base folder*/</span><br><span class="line">    private final String SMB_BASE_FOLDER_NAME = &quot;share&quot;;</span><br><span class="line"></span><br><span class="line">    /**IP*/</span><br><span class="line">    private String SMB_IP = &quot;172.16.192.156&quot;;</span><br><span class="line"></span><br><span class="line">    /**url*/</span><br><span class="line">    private String SMB_URL = StringUtils.EMPTY;</span><br><span class="line"></span><br><span class="line">    /**用户信息*/</span><br><span class="line">    private NtlmPasswordAuthentication auth = null;</span><br><span class="line"></span><br><span class="line">    public void init() &#123;</span><br><span class="line">        if (null == this.auth) &#123;</span><br><span class="line">            this.auth = new NtlmPasswordAuthentication(SMB_IP, SMB_USER, SMB_PASSWORD);</span><br><span class="line">        &#125;</span><br><span class="line">        if (StringUtils.isBlank(this.SMB_URL)) &#123;</span><br><span class="line">            this.SMB_URL = SMB_URL_TOP + SMB_IP + SMB_URL_SLANSH + SMB_BASE_FOLDER_NAME;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 读</span><br><span class="line">     * @return</span><br><span class="line">     * @throws Exception</span><br><span class="line">     */</span><br><span class="line">    public InputStream openFile() throws Exception &#123;</span><br><span class="line">        init();</span><br><span class="line">        SmbFile smbFile = new SmbFile(this.SMB_URL, this.auth);</span><br><span class="line">        //        SmbFile outSmbFile=new SmbFile(this.SMB_URL,this.auth);</span><br><span class="line">        //        smbFile.createNewFile();                  //创建文件</span><br><span class="line">        //        smbFile.copyTo(outSmbFile);               //将smbFile copy 到 outSmbFile</span><br><span class="line">        //        smbFile.mkdirs();                         //创建目录（还有 mkdir。mkdirs 支持多级创建，mkdir不支持）</span><br><span class="line">        //        smbFile.listFiles();                      //获取子文件/文件夹</span><br><span class="line">        return new SmbFileInputStream(smbFile);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void writeFile() throws Exception &#123;</span><br><span class="line">        InputStream in = openFile();</span><br><span class="line">        SmbFile smbFile = new SmbFile(this.SMB_URL, this.auth);//目标地址  这里我就不改了  人懒 ^V^.</span><br><span class="line">        /**</span><br><span class="line">         * 验证文件 或者文件夹是否存在  不存在先创建</span><br><span class="line">         */</span><br><span class="line">        if (!smbFile.exists()) &#123;</span><br><span class="line">            smbFile.createNewFile();</span><br><span class="line">            //  文件夹创建</span><br><span class="line">            smbFile.mkdirs();</span><br><span class="line">            //注：穿件文件不能包含目录创建，需要先创建目录在创建文件</span><br><span class="line">        &#125;</span><br><span class="line">        OutputStream out = new SmbFileOutputStream(smbFile);</span><br><span class="line">        IOUtils.copy(in, out);</span><br><span class="line">        //因为 IOUtils 中没有给刷新输出流，也没有关流 ，所以需要自己来处理</span><br><span class="line">        out.flush();</span><br><span class="line">        out.close();</span><br><span class="line">        in.close();</span><br><span class="line">        /**</span><br><span class="line">         * 一般情况下是：先打开的后关闭，后打开的先关闭</span><br><span class="line">         * 另一种情况：看依赖关系，如果流a依赖流b，应该先关闭流a，再关闭流b</span><br><span class="line">         * 例如处理流a依赖节点流b，应该先关闭处理流a，再关闭节点流b</span><br><span class="line">         * 当然完全可以只关闭处理流，不用关闭节点流。处理流关闭的时候，会调用其处理的节点流的关闭方法</span><br><span class="line">         * 如果将节点流关闭以后再关闭处理流，会抛出IO异常</span><br><span class="line">         */</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>转载请说明出处<a href="http://hanfeng.me/2018/01/21/SMB%20%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E5%8E%9F%E5%88%9B%EF%BC%89/" target="_blank" rel="noopener">http://hanfeng.me/2018/01/21/SMB%20%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E5%8E%9F%E5%88%9B%EF%BC%89/</a>;<br>欢迎拍砖。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/17/使用Thymeleaf API渲染模板生成静态页面/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Thymeleaf API渲染模板
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/15/Maven 常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Maven 常用命令</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="SMB 协议的使用（原创）" data-title="SMB 协议的使用（原创）" data-url="http://yoursite.com/2018/01/21/SMB 协议的使用（原创）/" data-images="/img/yzcxy.jpg" data-content="SMB 协议的使用（原创）">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+ 
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 一只程序猿
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+	
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+ 
+</body>
+</html>

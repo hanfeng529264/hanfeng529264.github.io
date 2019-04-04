@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>JDBC | 一只程序猿的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是JDBCJDBC（Java DataBase Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。JDBC提供了一种基准，据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序，同时，JDBC也是个商标名。 JDBC 的使用建立一个JDBC应用程序，本教程中以Ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC">
+<meta property="og:url" content="http://yoursite.com/2017/09/15/JDBC/index.html">
+<meta property="og:site_name" content="一只程序猿的博客">
+<meta property="og:description" content="什么是JDBCJDBC（Java DataBase Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。JDBC提供了一种基准，据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序，同时，JDBC也是个商标名。 JDBC 的使用建立一个JDBC应用程序，本教程中以Ja">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-10T13:45:12.658Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDBC">
+<meta name="twitter:description" content="什么是JDBCJDBC（Java DataBase Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。JDBC提供了一种基准，据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序，同时，JDBC也是个商标名。 JDBC 的使用建立一个JDBC应用程序，本教程中以Ja">
+  
+    <link rel="alternative" href="/atom.xml" title="一只程序猿的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("MW2iyQz6scY0XFrHP96SRKVb-gzGzoHsz", "9thbl1JAC6FeVjyjSEXHYBD1");</script>
+<script src="/js/Counter.js"></script>
+  
+</head></html>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/yzcxy.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">一只程序猿</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一切都是可以改变的，不可能只有庸人的词典里才有</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/hanfeng529264" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/hf529264@163.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="/2286670111" title="qq">qq</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/hanfeng0310" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://keveon.me">keveon.me</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pqsky.me">pqsky.me</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+	
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">一只程序猿</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/yzcxy.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">一只程序猿</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一切都是可以改变的，不可能只有庸人的词典里才有</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/hanfeng529264" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/hf529264@163.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="/2286670111" title="qq">qq</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/hanfeng0310" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-JDBC" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/15/JDBC/" class="article-date">
+  	<time datetime="2017-09-14T16:00:00.000Z" itemprop="datePublished">2017-09-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JDBC
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/09/15/JDBC/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="JDBC">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是JDBC"><a href="#什么是JDBC" class="headerlink" title="什么是JDBC"></a>什么是JDBC</h2><p>JDBC（Java DataBase Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。JDBC提供了一种基准，据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序，同时，JDBC也是个商标名。</p>
+<h2 id="JDBC-的使用"><a href="#JDBC-的使用" class="headerlink" title="JDBC 的使用"></a>JDBC 的使用</h2><p>建立一个JDBC应用程序，本教程中以Java连接MySQL为一个示例：</p>
+<ol>
+<li>导入包，在程序中包含数据库编程所需的JDBC类。大多数情况下，使用 import java.sql.*</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import java.sql.*;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>注册JDBC驱动程序，需要初始化驱动程序，这样就可以打开与数据库的通信。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>打开一个连接，使用DriverManager.getConnection()方法来创建一个Connection对象，它代表一个数据库的物理连接。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">static final String USER = &quot;root&quot;; //用户名</span><br><span class="line">static final String PASS = &quot;pwd123456&quot;; //密码</span><br><span class="line">System.out.println(&quot;Connecting to database...&quot;);</span><br><span class="line">conn = DriverManager.getConnection(DB_URL,USER,PASS); //上面的名字可以自定义的  但是这里要写对</span><br></pre></td></tr></table></figure>
+<p>4.执行一个查询， 需要使用一个类型为Statement或PreparedStatement的对象，并提交一个SQL语句到数据库执行查询。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;Creating statement...&quot;);</span><br><span class="line">stmt = conn.createStatement();</span><br><span class="line">String sql;</span><br><span class="line">sql = &quot;SELECT id, first, last, age FROM Employees&quot;;</span><br><span class="line">ResultSet rs = stmt.executeQuery(sql);</span><br></pre></td></tr></table></figure>
+<p>如果要执行一个SQL语句：UPDATE，INSERT或DELETE语句，那么需要下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;Creating statement...&quot;);</span><br><span class="line">stmt = conn.createStatement();</span><br><span class="line">String sql;</span><br><span class="line">sql = &quot;DELETE FROM Employees&quot;;</span><br><span class="line">ResultSet rs = stmt.executeUpdate(sql);</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li><p>获取结果，可以使用适当的ResultSet.getXXX()方法来检索的数据结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">while(rs.next())&#123;</span><br><span class="line">    //Retrieve by column name</span><br><span class="line">    int id  = rs.getInt(&quot;id&quot;);</span><br><span class="line">    int age = rs.getInt(&quot;age&quot;);</span><br><span class="line">    String first = rs.getString(&quot;first&quot;);</span><br><span class="line">    String last = rs.getString(&quot;last&quot;);</span><br><span class="line"></span><br><span class="line">    //Display values</span><br><span class="line">    System.out.print(&quot;ID: &quot; + id);</span><br><span class="line">    System.out.print(&quot;, Age: &quot; + age);</span><br><span class="line">    System.out.print(&quot;, First: &quot; + first);</span><br><span class="line">    System.out.println(&quot;, Last: &quot; + last);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清理环境资源，在使用JDBC与数据交互操作数据库中的数据后，应该明确地关闭所有的数据库资源以减少资源的浪费，对依赖于JVM的垃圾收集。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rs.close();</span><br><span class="line">stmt.close();</span><br><span class="line">conn.close();</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>完整示例。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">// 1. </span><br><span class="line">import java.sql.*;</span><br><span class="line"></span><br><span class="line">public class FirstExample &#123;</span><br><span class="line">   //注册驱动</span><br><span class="line">   static final String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;;  </span><br><span class="line">   static final String DB_URL = &quot;jdbc:mysql://localhost/test&quot;;</span><br><span class="line"></span><br><span class="line">   //数据库名和密码自己修改</span><br><span class="line">   static final String USER = &quot;username&quot;;</span><br><span class="line">   static final String PASS = &quot;password&quot;;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">       Connection conn = null;</span><br><span class="line">       Statement stmt = null;</span><br><span class="line">       try&#123;</span><br><span class="line">          // 2.</span><br><span class="line">          Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">          //3.</span><br><span class="line">          conn = DriverManager.getConnection(DB_URL,USER,PASS);</span><br><span class="line">          //4.</span><br><span class="line">          stmt = conn.createStatement();</span><br><span class="line">          String sql;</span><br><span class="line">          sql = &quot;SELECT id, first, last, age FROM Employees&quot;;</span><br><span class="line">          ResultSet rs = stmt.executeQuery(sql);</span><br><span class="line">          //5.</span><br><span class="line">          while(rs.next())&#123;</span><br><span class="line">             int id  = rs.getInt(&quot;id&quot;);</span><br><span class="line">             int age = rs.getInt(&quot;age&quot;);</span><br><span class="line">             String first = rs.getString(&quot;first&quot;);</span><br><span class="line">             String last = rs.getString(&quot;last&quot;);</span><br><span class="line">             </span><br><span class="line">             System.out.print(&quot;ID: &quot; + id);</span><br><span class="line">             System.out.print(&quot;, Age: &quot; + age);</span><br><span class="line">             System.out.print(&quot;, First: &quot; + first);</span><br><span class="line">             System.out.println(&quot;, Last: &quot; + last);</span><br><span class="line">          &#125;</span><br><span class="line">          //6.</span><br><span class="line">          rs.close();</span><br><span class="line">          stmt.close();</span><br><span class="line">          conn.close();</span><br><span class="line">       &#125;catch(SQLException se)&#123;</span><br><span class="line">       // 异常不要这么处理  不好，要携带异常描述和原因。有日志要用日志输出。</span><br><span class="line">          se.printStackTrace()；</span><br><span class="line">       &#125;catch(Exception e)&#123;</span><br><span class="line">          e.printStackTrace();// 同上</span><br><span class="line">       &#125;finally&#123;</span><br><span class="line">          try&#123;</span><br><span class="line">             if(stmt!=null)</span><br><span class="line">                stmt.close();</span><br><span class="line">          &#125;catch(SQLException se2)&#123;</span><br><span class="line">            //自定义后续处理，这里不写了</span><br><span class="line">          &#125;</span><br><span class="line">          try&#123;</span><br><span class="line">             if(conn!=null)</span><br><span class="line">                conn.close();</span><br><span class="line">          &#125;catch(SQLException se)&#123;</span><br><span class="line">             se.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="JDBC-的数据类型"><a href="#JDBC-的数据类型" class="headerlink" title="JDBC 的数据类型"></a>JDBC 的数据类型</h2><table>
+<thead>
+<tr>
+<th>SQL</th>
+<th>JDBC\JAVA</th>
+<th>setXXX</th>
+<th>updateXXX</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VARCHAR</td>
+<td>java.lang.String</td>
+<td>setString</td>
+<td>updateString</td>
+</tr>
+<tr>
+<td>CHAR</td>
+<td>java.lang.String</td>
+<td>setString</td>
+<td>updateString</td>
+</tr>
+<tr>
+<td>LONGVARCHAR</td>
+<td>java.lang.String</td>
+<td>setString</td>
+<td>updateString</td>
+</tr>
+<tr>
+<td>BIT</td>
+<td>boolean</td>
+<td>setBoolean</td>
+<td>updateBoolean</td>
+</tr>
+<tr>
+<td>NUMERIC</td>
+<td>java.math.BigDecimal</td>
+<td>setBigDecimal</td>
+<td>updateBigDecimal</td>
+</tr>
+<tr>
+<td>TINYINT</td>
+<td>byte</td>
+<td>setByte</td>
+<td>updateByte</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>short</td>
+<td>setShort</td>
+<td>updateShort</td>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>int</td>
+<td>setInt</td>
+<td>updateInt</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>long</td>
+<td>setLong</td>
+<td>updateLong</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td>float</td>
+<td>setFloat</td>
+<td>updateFloat</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>float</td>
+<td>setFloat</td>
+<td>updateFloat</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>double</td>
+<td>setDouble</td>
+<td>updateDouble</td>
+</tr>
+<tr>
+<td>VARBINARY</td>
+<td>byte[ ]</td>
+<td>setBytes</td>
+<td>updateBytes</td>
+</tr>
+<tr>
+<td>BINARY</td>
+<td>byte[ ]</td>
+<td>setBytes</td>
+<td>updateBytes</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>java.sql.Date</td>
+<td>setDate</td>
+<td>updateDate</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>java.sql.Time</td>
+<td>setTime</td>
+<td>updateTime</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>java.sql.Timestamp</td>
+<td>setTimestamp</td>
+<td>updateTimestamp</td>
+</tr>
+<tr>
+<td>CLOB</td>
+<td>java.sql.Clob</td>
+<td>setClob</td>
+<td>updateClob</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>java.sql.Blob</td>
+<td>setBlob</td>
+<td>updateBlob</td>
+</tr>
+<tr>
+<td>ARRAY</td>
+<td>java.sql.Array</td>
+<td>setARRAY</td>
+<td>updateARRAY</td>
+</tr>
+<tr>
+<td>REF</td>
+<td>java.sql.Ref</td>
+<td>SetRef</td>
+<td>updateRef</td>
+</tr>
+<tr>
+<td>STRUCT</td>
+<td>java.sql.Struct</td>
+<td>SetStruct</td>
+<td>updateStruct</td>
+</tr>
+</tbody>
+</table>
+<p>在JDBC3.0中增强支持BLOB，CLOB，ARRAY，REF等数据类型。ResultSet对象可调用UPDATEBLOB()，updateCLOB()，updateArray()和updateRef()方法，使您可以在数据库服务器上直接操作相应的数据。</p>
+<p>对于setXXX()和updateXXX()方法，可以转换成特定的Java类型到特定的JDBC数据类型。而使用setObject()和updateObject()方法，几乎所有的Java类型映射到JDBC数据类型。</p>
+<p>ResultSet对象提供相应的getXXX()方法为每个数据类型来检索列值。每一种类型方法，可以使用与列名或由列的序号位置来获取列的数据。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/16/表达语言_jsp/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          表达式语言_ jsp
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/17/Intro.js使用心得/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Intro.js使用心得</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="JDBC" data-title="JDBC" data-url="http://yoursite.com/2017/09/15/JDBC/" data-images="/img/yzcxy.jpg" data-content="JDBC">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+ 
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 一只程序猿
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+	
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+ 
+</body>
+</html>
